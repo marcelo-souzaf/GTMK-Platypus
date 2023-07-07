@@ -33,7 +33,18 @@ _global_script_class_icons={
 [application]
 
 config/name="Gtmk"
+run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Game="*res://scripts/game.gd"
+Classes="*res://scripts/classes.gd"
+
+[global]
+
+warn=false
+warning=false
 
 [gui]
 

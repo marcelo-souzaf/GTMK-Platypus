@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name Entity
 
-onready var sprite = $Sprite
+onready var sprite = $AnimatedSprite
 
 var class_: int = Classes.Swordsman
 var health: int = 100
@@ -14,7 +14,12 @@ func _ready():
 	pass
 
 func attack():
-	pass
+	var attack = Classes.attacks[class_].instance()
+	attack.launch(get_local_mouse_position())
+	add_child(attack)
+
+func take_damage(amount : int):
+	health -= amount
 
 func on_damage_taken():
 	pass
