@@ -1,7 +1,16 @@
 extends "./entity.gd"
 class_name Player
 
+func _ready():
+	Game.player = self
+	Game.game = get_parent()
+
 func _process(delta):
+	# Attack
+	if Input.is_action_just_pressed("attack"):
+		self.attack()
+
+	# Movement
 	var moving = false
 	if Input.is_action_pressed("move_up"):
 		lin_speed.y -= acceleration * delta
@@ -23,12 +32,3 @@ func _process(delta):
 	
 	lin_speed = lin_speed.limit_length(max_speed)
 	lin_speed = move_and_slide(lin_speed)
-
-func on_kill(enemy):
-	self.position = enemy.position
-	self.sprite.frames = enemy.sprite.frames
-	enemy.queue_free()
-
-func change_class(new_class):
-	self.class_ = new_class
-

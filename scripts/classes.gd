@@ -11,5 +11,6 @@ enum {
 # Set the weaknesses of each class in the order they were enumerated
 const weakness = [Archer, Mage, Swordsman]
 const strength = [Mage, Swordsman, Archer]
-
-onready var teleport_particles = preload("res://scenes/TeleportParticles.tscn")
+const attacks = [preload("res://scenes/SwordsmanAttack.tscn"),
+				preload("res://scenes/ArcherAttack.tscn"),
+				preload("res://scenes/MageAttack.tscn")]
