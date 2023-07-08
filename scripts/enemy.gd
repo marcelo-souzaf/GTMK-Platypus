@@ -12,29 +12,24 @@ func _ready():
 	set_collision_mask_bit(1, true)
 
 func _process(delta):
-	# Attack
-	if Input.is_action_just_pressed("attack"):
-		self.attack()
+	var player_dist = player.position.distance_to(position)
 
-	# Movement
-	var moving = false
-	if Input.is_action_pressed("move_up"):
-		lin_speed.y -= acceleration * delta
-		moving = true
-	if Input.is_action_pressed("move_down"):
-		lin_speed.y += acceleration * delta
-		moving = true
-	if Input.is_action_pressed("move_left"):
-		sprite.flip_h = true
-		lin_speed.x -= acceleration * delta
-		moving = true
-	if Input.is_action_pressed("move_right"):
-		sprite.flip_h = false
-		lin_speed.x += acceleration * delta
-		moving = true
-	# Deaccelerate
-	if not moving:
-		lin_speed = lin_speed.linear_interpolate(Vector2(), 0.2)
+	# if player is on attack radius
+	if player_dist < Classes.attack_radius[class_]:
+		attack(player.position)
+	# if player is on sight radius
+	elif player_dist < Classes.sight_radius[class_]:
+		chase(delta)
+	# if player is out of sight radius
+	else:
+		idle(delta)
 	
-	lin_speed = lin_speed.limit_length(max_speed)
 	lin_speed = move_and_slide(lin_speed)
+
+func chase(delta):
+	var dir = (player.position - position).normalized()
+	lin_speed += dir * Classes.acceleration[class_] * delta
+	lin_speed = lin_speed.limit_length(Classes.max_speed[class_])
+
+func idle(_delta):
+	lin_speed = lin_speed.linear_interpolate(Vector2(), 0.2)

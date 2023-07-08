@@ -17,7 +17,6 @@ func _ready():
 	else:
 		fireball.set_collision_mask_bit(2, false)
 	attack_timer.wait_time = ATTACK_DURATION
-	attack(get_global_mouse_position())
 
 func attack(mouse_pos):
 	var direction = mouse_pos - position

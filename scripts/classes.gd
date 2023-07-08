@@ -15,5 +15,8 @@ const attacks = [preload("res://scenes/attacks/SwordsmanAttack.tscn"),
 				preload("res://scenes/attacks/ArcherAttack.tscn"),
 				preload("res://scenes/attacks/MageAttack.tscn")]
 
-const speeds = [300, 200, 100]
+const acceleration = [800, 800, 800]
+const max_speed = [250, 350, 150]
 const attack_radius = [50, 300, 150]
+
+const sight_radius = [200, 300, 400]

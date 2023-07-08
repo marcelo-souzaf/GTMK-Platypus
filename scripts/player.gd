@@ -13,7 +13,7 @@ func _ready():
 func _process(delta):
 	# Attack
 	if Input.is_action_just_pressed("attack"):
-		self.attack(true)
+		self.attack(get_global_mouse_position(), true)
 
 	# Movement
 	var moving = false

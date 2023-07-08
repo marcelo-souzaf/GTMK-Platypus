@@ -12,7 +12,6 @@ func _ready():
 		arrow.set_collision_mask_bit(0, false)
 	else:
 		arrow.set_collision_mask_bit(1, false)
-	attack(get_global_mouse_position())
 
 func attack(mouse_pos):
 	var direction = mouse_pos - position

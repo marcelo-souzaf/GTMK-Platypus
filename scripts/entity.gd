@@ -13,10 +13,11 @@ var lin_speed = Vector2()
 func _ready():
 	pass
 
-func attack(by_player : bool = false):
+func attack(dir : Vector2, by_player : bool = false):
 	var attack = Classes.attacks[class_].instance()
 	attack.by_player = by_player
 	add_child(attack)
+	attack.attack(dir)
 
 func take_damage(amount : int = 100):
 	health -= amount
