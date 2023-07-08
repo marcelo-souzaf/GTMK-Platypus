@@ -1,5 +1,64 @@
-[gd_scene format=2]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/bg_tile_r.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Spawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=4]
 
 [node name="Game" type="Node2D"]
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+[node name="GameOver" type="CanvasLayer" parent="."]
+pause_mode = 2
+visible = false
+offset = Vector2( -240, 0 )
+transform = Transform2D( 1, 0, 0, 1, -240, 0 )
+
+[node name="CenterContainer" type="CenterContainer" parent="GameOver"]
+margin_right = 1280.0
+margin_bottom = 360.0
+
+[node name="Label" type="Label" parent="GameOver/CenterContainer"]
+margin_left = 603.0
+margin_top = 173.0
+margin_right = 676.0
+margin_bottom = 187.0
+text = "Game Over"
+align = 1
+valign = 1
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -4646.0
+margin_top = -2943.0
+margin_right = 4646.0
+margin_bottom = 2943.0
+texture = ExtResource( 1 )
+stretch_mode = 2
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
+class_ = 1
+
+[node name="Enemies" type="YSort" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 300, 300 )
+class_ = 1
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="Spawner" parent="Spawners" instance=ExtResource( 3 )]
+position = Vector2( -1068, -364 )
+max_enemies_alive = 1
+
+[node name="Spawner2" parent="Spawners" instance=ExtResource( 3 )]
+position = Vector2( 759, 760 )
+max_enemies_alive = 0
+
+[node name="Spawner3" parent="Spawners" instance=ExtResource( 3 )]
+position = Vector2( 1558, -318 )
+max_enemies_alive = 0

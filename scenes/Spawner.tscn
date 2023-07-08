@@ -6,8 +6,6 @@
 radius = 400.0
 
 [node name="Spawner" type="Position2D"]
-position = Vector2( -447, -308 )
-scale = Vector2( 1.01451, 1.01359 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true

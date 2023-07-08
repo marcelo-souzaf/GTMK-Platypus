@@ -207,9 +207,9 @@ custom_constants/separation = 100
 alignment = 1
 
 [node name="logo 1" type="TextureRect" parent="HBoxContainer"]
-margin_left = 187.0
-margin_right = 437.0
-margin_bottom = 600.0
+margin_left = 315.0
+margin_right = 565.0
+margin_bottom = 720.0
 rect_min_size = Vector2( 250, 250 )
 rect_pivot_offset = Vector2( 125, 300 )
 texture = ExtResource( 1 )
@@ -218,11 +218,10 @@ stretch_mode = 6
 
 [node name="logo 2" type="TextureRect" parent="HBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 537.0
-margin_right = 837.0
-margin_bottom = 600.0
+margin_left = 665.0
+margin_right = 965.0
+margin_bottom = 720.0
 rect_min_size = Vector2( 300, 300 )
-rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 150, 300 )
 texture = ExtResource( 2 )
 expand = true

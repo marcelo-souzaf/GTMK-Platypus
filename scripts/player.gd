@@ -2,8 +2,7 @@ extends "./entity.gd"
 class_name Player
 
 func _ready():
-	Game.player = self
-	Game.game = get_parent()
+	Game.init(self, get_parent().get_parent())
 	self.is_player = true
 	update_stats()
 
@@ -36,7 +35,20 @@ func _physics_process(delta):
 	lin_speed = lin_speed.limit_length(max_speed)
 	lin_speed = move_and_slide(lin_speed)
 
+func update_stats():
+	.update_stats()
+	Game.ui.update_stats(self.class_)
+
 func take_damage(amount: int, attacker_class: int):
+	if not $Invulnerability.is_stopped():
+		return
 	.take_damage(amount, attacker_class)
+	Game.ui.health_bar.update_bar(self)
+	
 	if self.health <= 0:
 		Game.game_over()
+		return
+	become_invulnerable()
+
+func _on_Invulnerability_timeout():
+	sprite.material = null

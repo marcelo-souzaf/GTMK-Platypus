@@ -23,17 +23,23 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://scripts/player.gd"
+}, {
+"base": "Position2D",
+"class": "Spawner",
+"language": "GDScript",
+"path": "res://scripts/Spawner.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
 "Entity": "",
-"Player": ""
+"Player": "",
+"Spawner": ""
 }
 
 [application]
 
 config/name="Gtmk"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -41,17 +47,24 @@ config/icon="res://icon.png"
 Game="*res://scripts/game.gd"
 Classes="*res://scripts/classes.gd"
 
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+gdscript/warnings/integer_division=false
+
 [display]
 
-window/size/width=1080
+window/size/width=1280
 window/size/height=720
-window/size/test_width=1024
-window/size/test_height=600
+window/size/test_width=960
+window/size/test_height=540
+window/dpi/allow_hidpi=true
 
 [global]
 
 warn=false
 warning=false
+scene=false
 
 [gui]
 

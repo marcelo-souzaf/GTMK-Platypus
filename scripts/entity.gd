@@ -3,8 +3,7 @@ class_name Entity
 
 onready var sprite = $AnimatedSprite
 onready var cooldown = $CooldownTimer
-onready var healthbar_scene = preload("res://scenes/HealthBar.tscn")
-var healthbar = null
+var health_bar = null
 export var class_: int
 
 var health: int
@@ -17,14 +16,13 @@ var lin_speed := Vector2.ZERO
 
 func _ready():
 	update_appearance()
-	create_healthbar()
+	create_health_bar()
 
 func attack(direction: Vector2):
+	cooldown.start(Classes.attack_cooldown[class_])
 	var attack = Classes.attacks[class_].instance()
 	attack.init(direction, self.is_player)
 	add_child(attack)
-
-	cooldown.start(Classes.attack_cooldown[class_])
 
 func take_damage(amount: int, attacker_class: int):
 	var weakness: int = Classes.weakness[class_]
@@ -32,7 +30,7 @@ func take_damage(amount: int, attacker_class: int):
 	health -= amount * (1 + int(weakness == attacker_class or weakness == Classes.All))
 
 	# update the lifebar
-	healthbar.update_bar(self)
+	health_bar.update_bar(self)
 
 func update_stats():
 	self.health = Classes.health[class_]
@@ -42,9 +40,14 @@ func update_stats():
 
 func update_appearance():
 	self.sprite.frames = Classes.animations[class_]
+	# self.sprite.play("idle")
 
-func create_healthbar():
-	var healthbar_inst = healthbar_scene.instance()
-	add_child(healthbar_inst)
-	healthbar_inst.init(self)
-	self.healthbar = healthbar_inst
+func create_health_bar():
+	var health_bar_inst = Game.health_bar_scene.instance()
+	add_child(health_bar_inst)
+	health_bar_inst.init(self)
+	self.health_bar = health_bar_inst
+
+func become_invulnerable(duration: float = 0.4):
+	$Invulnerability.start(duration)
+	sprite.material = Game.blinking_shader

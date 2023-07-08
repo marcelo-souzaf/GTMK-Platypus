@@ -19,7 +19,10 @@ func _ready():
 func _physics_process(_delta):
 	for body in self.get_overlapping_bodies():
 		if body.has_method("take_damage"):
-			body.take_damage(damage, Classes.Zombie if is_zombie else Classes.Swordsman)
+			if is_zombie:
+				body.take_damage(damage, Classes.Zombie)
+			else:
+				body.take_damage(damage / 2, Classes.Swordsman)
 
 func _on_AttackTimer_timeout():
 	queue_free()
