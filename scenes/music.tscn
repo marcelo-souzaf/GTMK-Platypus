@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/musics/GMTK_2024_test.mp3" type="AudioStream" id=1]
+[ext_resource path="res://assets/musics/GMTK_2024_Archer_prewiev.mp3" type="AudioStream" id=2]
+[ext_resource path="res://assets/musics/GMTK_2024_Wizard_prewiev.mp3" type="AudioStream" id=3]
+[ext_resource path="res://assets/musics/GMTK_2024_warrior_prewiev.mp3" type="AudioStream" id=4]
+[ext_resource path="res://scenes/music.gd" type="Script" id=5]
+
+[node name="Node2D" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 5 )
+
+[node name="MusicS" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -80.0
+autoplay = true
+
+[node name="MusicA" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -80.0
+autoplay = true
+
+[node name="MusicM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -80.0
+autoplay = true
+
+[node name="MusicBase" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+autoplay = true

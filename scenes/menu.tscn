@@ -183,14 +183,14 @@ __meta__ = {
 }
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
-margin_right = 58.0
-margin_bottom = 34.0
+margin_right = 102.0
+margin_bottom = 56.0
 text = "Play"
 
 [node name="AboutButton" type="Button" parent="VBoxContainer"]
-margin_top = 38.0
-margin_right = 58.0
-margin_bottom = 72.0
+margin_top = 60.0
+margin_right = 102.0
+margin_bottom = 116.0
 text = "About"
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -222,6 +222,7 @@ margin_left = 665.0
 margin_right = 965.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 300, 300 )
+rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 150, 300 )
 texture = ExtResource( 2 )
 expand = true

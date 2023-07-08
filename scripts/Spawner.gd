@@ -2,7 +2,7 @@ extends Position2D
 class_name Spawner
 
 onready var timer = $CooldownTimer
-onready var enemies_container = Game.game.get_node("Enemies")
+onready var enemies_container = get_node("../../Enemies")
 
 export var radius := 400
 export var min_player_distance := 1000
@@ -19,7 +19,6 @@ func _ready():
 
 	timer.wait_time = rand_range(3.0, 7.5)
 	timer.start()
-
 
 func _on_CooldownTimer_timeout():
 	# if it's close enough to the player

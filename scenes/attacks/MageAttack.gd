@@ -3,17 +3,14 @@ extends KinematicBody2D
 onready var attack_timer = $AttackTimer
 onready var explosion_area = $ExplosionArea
 
-export var damage := 100
-
-const FIREBALL_SPEED = 600
+const FIREBALL_SPEED = 350
 const ATTACK_DURATION = 0.1
 
 var fireball_dir := Vector2.ZERO
 var exploding := false
 var by_player: bool
 
-func init(mouse_pos: Vector2, by_player_: bool):
-	var direction = mouse_pos - position
+func init(direction: Vector2, by_player_: bool):
 	fireball_dir = direction.normalized()
 	
 	self.rotation = fireball_dir.angle()
@@ -36,12 +33,19 @@ func _physics_process(delta):
 					create_explosion()
 			else:
 				create_explosion()
-	else:
-		for body in explosion_area.get_overlapping_bodies():
-			if body.has_method("take_damage"):
-				body.take_damage(damage, Classes.Mage)
+
 
 func create_explosion():
+	for body in explosion_area.get_overlapping_bodies():
+		if body.has_method("take_damage"):
+			if by_player:
+				if body == Game.player:
+					continue
+				body.take_damage(Classes.damage[Classes.Mage] * 3, Classes.Mage)
+			else:
+				if body == Game.player:
+					continue
+				body.take_damage(Classes.damage[Classes.Mage], Classes.Mage)
 	attack_timer.start()
 	exploding = true
 

@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-export var damage := 50
-
 const ARROW_SPEED = 1500
 
 var arrow_dir := Vector2.ZERO
@@ -25,8 +23,8 @@ func _physics_process(delta):
 		var body = collision.collider
 		if by_player and body != Game.player:
 			if body.has_method("take_damage"):
-				body.take_damage(damage, Classes.Archer)
+				body.take_damage(Classes.damage[Classes.Archer] * 3, Classes.Archer)
 		elif not by_player and body == Game.player:
 			if body.has_method("take_damage"):
-				body.take_damage(damage, Classes.Archer)
+				body.take_damage(Classes.damage[Classes.Archer], Classes.Archer)
 		queue_free()

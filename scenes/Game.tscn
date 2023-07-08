@@ -1,64 +1,1053 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=28 format=2]
 
-[ext_resource path="res://assets/bg_tile_r.png" type="Texture" id=1]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Spawner.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/bg_tile_r.png" type="Texture" id=4]
+[ext_resource path="res://scripts/scenario.gd" type="Script" id=5]
+[ext_resource path="res://resources/main_theme.tres" type="Theme" id=6]
+[ext_resource path="res://scripts/message.gd" type="Script" id=7]
+[ext_resource path="res://scripts/Main_game.gd" type="Script" id=8]
+[ext_resource path="res://assets/map_sprites/wall_hor.png" type="Texture" id=9]
+[ext_resource path="res://assets/map_sprites/wall_ver.png" type="Texture" id=10]
+[ext_resource path="res://assets/map_sprites/tree_1.png" type="Texture" id=11]
+[ext_resource path="res://assets/map_sprites/pine_3.png" type="Texture" id=12]
+[ext_resource path="res://scripts/area_messager.gd" type="Script" id=13]
+[ext_resource path="res://assets/map_sprites/ruin_5.png" type="Texture" id=14]
+[ext_resource path="res://scenes/UpgradePanel.tscn" type="PackedScene" id=15]
+[ext_resource path="res://resources/ingame_ui_font.tres" type="DynamicFont" id=16]
+[ext_resource path="res://assets/ui/Icon_Kill_Empty_32.png" type="Texture" id=17]
+[ext_resource path="res://assets/ui/Swordsman.png" type="Texture" id=18]
+[ext_resource path="res://assets/ui/Archer.png" type="Texture" id=19]
+[ext_resource path="res://scripts/HUD.gd" type="Script" id=20]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 51, 24 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 104, 354 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "show_off"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "show_up"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Shader" id=8]
+code = "shader_type canvas_item;
+
+uniform float lod: hint_range(0.0, 5) = 2.0;
+
+void fragment(){
+	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV, lod);
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+shader_param/lod = 2.0
 
 [node name="Game" type="Node2D"]
-
-[node name="GameOver" type="CanvasLayer" parent="."]
-pause_mode = 2
-visible = false
-offset = Vector2( -240, 0 )
-transform = Transform2D( 1, 0, 0, 1, -240, 0 )
-
-[node name="CenterContainer" type="CenterContainer" parent="GameOver"]
-margin_right = 1280.0
-margin_bottom = 360.0
-
-[node name="Label" type="Label" parent="GameOver/CenterContainer"]
-margin_left = 603.0
-margin_top = 173.0
-margin_right = 676.0
-margin_bottom = 187.0
-text = "Game Over"
-align = 1
-valign = 1
+script = ExtResource( 8 )
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -4646.0
-margin_top = -2943.0
-margin_right = 4646.0
-margin_bottom = 2943.0
-texture = ExtResource( 1 )
+margin_left = -5586.0
+margin_top = -3592.0
+margin_right = 11592.0
+margin_bottom = 8410.0
+texture = ExtResource( 4 )
 stretch_mode = 2
+
+[node name="Spawners" type="Node" parent="."]
+
+[node name="Spawner" parent="Spawners" instance=ExtResource( 3 )]
+position = Vector2( 1918, 1068 )
+radius = 1500
+min_player_distance = 1500
+
+[node name="Spawner2" parent="Spawners" instance=ExtResource( 3 )]
+position = Vector2( -1921, 1673 )
+radius = 1000
+min_player_distance = 1500
+
+[node name="Spawner3" parent="Spawners" instance=ExtResource( 3 )]
+position = Vector2( 2512, 5326 )
+radius = 1000
+min_player_distance = 1500
+
+[node name="Spawner4" parent="Spawners" instance=ExtResource( 3 )]
+position = Vector2( 6946, 912 )
+radius = 1000
+min_player_distance = 1500
+
+[node name="World" type="Node" parent="."]
+
+[node name="Scenario Tree" type="StaticBody2D" parent="World"]
+position = Vector2( -4264, -2424 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree2" type="StaticBody2D" parent="World"]
+position = Vector2( -4408, -2328 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree2"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree2/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree2/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree2"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Wall" type="StaticBody2D" parent="World"]
+position = Vector2( -3691, -2441 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -474, 127, -473, -102, -300, -207, -141, -94, -113, -242, 118, -246, 132, -88, 472, -108, 476, 128, 135.528, 188.874, -5, 214 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -683.975, -168.158, -504.153, -99.1442, -490.265, 55.3154, -400.4, 75.229, -382.044, -52.2802, -199.701, 17.7012, -65.4326, -33.4662, -34.9478, 61.9531, 54.9177, 28.7642, 54.9177, -86.292, 270.594, -161.521, 268.597, -342.955, -209.686, -212.411, -683.975, -354.018 )
+
+[node name="Scenario Wall5" type="StaticBody2D" parent="World"]
+position = Vector2( -2124, -2329 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall5"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall5/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall5/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -474, 127, -473, -102, -300, -207, -141, -94, -113, -242, 118, -246, 132, -88, 472, -108, 476, 128, 135.528, 188.874, -5, 214 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall5"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -683.975, -168.158, -504.153, -99.1442, -490.265, 55.3154, -400.4, 75.229, -382.044, -52.2802, -199.701, 17.7012, -65.4326, -33.4662, -34.9478, 61.9531, 54.9177, 28.7642, 54.9177, -86.292, 270.594, -161.521, 268.597, -342.955, -209.686, -212.411, -683.975, -354.018 )
+
+[node name="Scenario Tree3" type="StaticBody2D" parent="World"]
+position = Vector2( -3161, -2384 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree3"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree3/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree3/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree3"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree9" type="StaticBody2D" parent="World"]
+position = Vector2( -2700, -2395 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree9"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree9/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree9/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree9"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree11" type="StaticBody2D" parent="World"]
+position = Vector2( -1511, -2293 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree11"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree11/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree11/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree11"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree8" type="StaticBody2D" parent="World"]
+position = Vector2( -2870, -2335 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree8"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree8/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree8/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree8"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree4" type="StaticBody2D" parent="World"]
+position = Vector2( -3054, -2291 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree4"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree4/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree4/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree4"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Wall2" type="StaticBody2D" parent="World"]
+position = Vector2( -4480, -1841 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall2"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 10 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall2/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall2/Tree_T1/Area2D"]
+polygon = PoolVector2Array( 97, -74, 122, -226, 73, -385, 5, -420, -40, -378, -129, -424, -227, -173, -153, -32 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall2"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -56.9146, 358.443, -6.98975, 311.978, -10.9834, -243.387, -95.8564, -493.413, -133.799, -1141.71, -215.677, -1188.17, -391.414, -663.784, -292.562, 108.418, -133.799, 170.371 )
+
+[node name="Scenario Tree6" type="StaticBody2D" parent="World"]
+position = Vector2( -3052, -1744 )
+script = ExtResource( 5 )
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree6"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 12 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree6/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree6/Tree_T1/Area2D"]
+polygon = PoolVector2Array( 63, 132, 108, 82, 104, -31, 42, -151, -16, -94, -59, -118, -102, -45, -80, 64 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree6"]
+position = Vector2( 45, -81 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="World/Scenario Tree6"]
+position = Vector2( -24, -122 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree7" type="StaticBody2D" parent="World"]
+position = Vector2( -2863, -1684 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree7"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree7/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree7/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree7"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree10" type="StaticBody2D" parent="World"]
+position = Vector2( -1693, -1616 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree10"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree10/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree10/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree10"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree5" type="StaticBody2D" parent="World"]
+position = Vector2( -3232, -1686 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree5"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree5/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree5/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree5"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Wall3" type="StaticBody2D" parent="World"]
+position = Vector2( -3786, -1548 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall3"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall3/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall3/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -474, 127, -473, -102, -300, -207, -141, -94, -113, -242, 118, -246, 132, -88, 472, -108, 476, 128, 135.528, 188.874, -5, 214 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall3"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -683.975, -168.158, -504.153, -99.1442, -490.265, 55.3154, -400.4, 75.229, -382.044, -52.2802, -199.701, 17.7012, -65.4326, -33.4662, -34.9478, 61.9531, 54.9177, 28.7642, 54.9177, -86.292, 270.594, -161.521, 268.597, -342.955, -209.686, -212.411, -683.975, -354.018 )
+
+[node name="Scenario Wall4" type="StaticBody2D" parent="World"]
+position = Vector2( -2291, -1506 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall4"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall4/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall4/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -474, 127, -473, -102, -300, -207, -141, -94, -113, -242, 118, -246, 132, -88, 472, -108, 476, 128, 135.528, 188.874, -5, 214 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall4"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -683.975, -168.158, -504.153, -99.1442, -490.265, 55.3154, -400.4, 75.229, -382.044, -52.2802, -199.701, 17.7012, -65.4326, -33.4662, -34.9478, 61.9531, 54.9177, 28.7642, 54.9177, -86.292, 270.594, -161.521, 268.597, -342.955, -209.686, -212.411, -683.975, -354.018 )
+
+[node name="Scenario Wall7" type="StaticBody2D" parent="World"]
+position = Vector2( -796, -865 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall7"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall7/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall7/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -474, 127, -473, -102, -300, -207, -141, -94, -113, -242, 118, -246, 132, -88, 472, -108, 476, 128, 135.528, 188.874, -5, 214 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall7"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -683.975, -168.158, -504.153, -99.1442, -490.265, 55.3154, -400.4, 75.229, -382.044, -52.2802, -199.701, 17.7012, -65.4326, -33.4662, -34.9478, 61.9531, 54.9177, 28.7642, 54.9177, -86.292, 270.594, -161.521, 268.597, -342.955, -209.686, -212.411, -683.975, -354.018 )
+
+[node name="Scenario Wall8" type="StaticBody2D" parent="World"]
+position = Vector2( -903, -2189 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall8"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall8/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall8/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -474, 127, -473, -102, -300, -207, -141, -94, -113, -242, 118, -246, 132, -88, 472, -108, 476, 128, 135.528, 188.874, -5, 214 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall8"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -683.975, -168.158, -504.153, -99.1442, -490.265, 55.3154, -400.4, 75.229, -382.044, -52.2802, -199.701, 17.7012, -65.4326, -33.4662, -34.9478, 61.9531, 54.9177, 28.7642, 54.9177, -86.292, 270.594, -161.521, 268.597, -342.955, -209.686, -212.411, -683.975, -354.018 )
+
+[node name="Scenario Wall10" type="StaticBody2D" parent="World"]
+position = Vector2( 68, -2164 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall10"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall10/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall10/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -474, 127, -473, -102, -300, -207, -141, -94, -113, -242, 118, -246, 132, -88, 472, -108, 476, 128, 135.528, 188.874, -5, 214 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall10"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -683.975, -168.158, -504.153, -99.1442, -490.265, 55.3154, -400.4, 75.229, -382.044, -52.2802, -199.701, 17.7012, -65.4326, -33.4662, -34.9478, 61.9531, 54.9177, 28.7642, 54.9177, -86.292, 270.594, -161.521, 268.597, -342.955, -209.686, -212.411, -683.975, -354.018 )
+
+[node name="Scenario Wall11" type="StaticBody2D" parent="World"]
+position = Vector2( 1287, -1427 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall11"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall11/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall11/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -474, 127, -473, -102, -300, -207, -141, -94, -113, -242, 118, -246, 132, -88, 472, -108, 476, 128, 135.528, 188.874, -5, 214 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall11"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -683.975, -168.158, -504.153, -99.1442, -490.265, 55.3154, -400.4, 75.229, -382.044, -52.2802, -199.701, 17.7012, -65.4326, -33.4662, -34.9478, 61.9531, 54.9177, 28.7642, 54.9177, -86.292, 270.594, -161.521, 268.597, -342.955, -209.686, -212.411, -683.975, -354.018 )
+
+[node name="Scenario Wall12" type="StaticBody2D" parent="World"]
+position = Vector2( 2328, -1376 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall12"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 9 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall12/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall12/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -474, 127, -473, -102, -300, -207, -141, -94, -113, -242, 118, -246, 132, -88, 472, -108, 476, 128, 135.528, 188.874, -5, 214 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall12"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -683.975, -168.158, -504.153, -99.1442, -490.265, 55.3154, -400.4, 75.229, -382.044, -52.2802, -199.701, 17.7012, -65.4326, -33.4662, -34.9478, 61.9531, 54.9177, 28.7642, 54.9177, -86.292, 270.594, -161.521, 268.597, -342.955, -209.686, -212.411, -683.975, -354.018 )
+
+[node name="Scenario Wall6" type="StaticBody2D" parent="World"]
+position = Vector2( -1511, -1168 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall6"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 10 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall6/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall6/Tree_T1/Area2D"]
+polygon = PoolVector2Array( 97, -74, 122, -226, 73, -385, 5, -420, -40, -378, -129, -424, -227, -173, -153, -32 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall6"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -56.9146, 358.443, -6.98975, 311.978, -10.9834, -243.387, -95.8564, -493.413, -133.799, -1141.71, -215.677, -1188.17, -391.414, -663.784, -292.562, 108.418, -133.799, 170.371 )
+
+[node name="Scenario Wall9" type="StaticBody2D" parent="World"]
+position = Vector2( 610, -1780 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall9"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 10 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall9/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall9/Tree_T1/Area2D"]
+polygon = PoolVector2Array( 97, -74, 122, -226, 73, -385, 5, -420, -40, -378, -129, -424, -227, -173, -153, -32 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall9"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -56.9146, 358.443, -6.98975, 311.978, -10.9834, -243.387, -95.8564, -493.413, -133.799, -1141.71, -215.677, -1188.17, -391.414, -663.784, -292.562, 108.418, -133.799, 170.371 )
+
+[node name="Scenario Tree12" type="StaticBody2D" parent="World"]
+position = Vector2( -247, -758 )
+script = ExtResource( 5 )
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree12"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 12 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree12/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree12/Tree_T1/Area2D"]
+polygon = PoolVector2Array( 63, 132, 108, 82, 104, -31, 42, -151, -16, -94, -59, -118, -102, -45, -80, 64 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree12"]
+position = Vector2( 45, -81 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="World/Scenario Tree12"]
+position = Vector2( -24, -122 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree13" type="StaticBody2D" parent="World"]
+position = Vector2( -53, -660 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree13"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree13/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree13/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree13"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree14" type="StaticBody2D" parent="World"]
+position = Vector2( -53, -660 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree14"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree14/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree14/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree14"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree15" type="StaticBody2D" parent="World"]
+position = Vector2( -149, -534 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree15"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree15/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree15/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree15"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree16" type="StaticBody2D" parent="World"]
+position = Vector2( 1825, -1332 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree16"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree16/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree16/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree16"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Wall13" type="StaticBody2D" parent="World"]
+position = Vector2( 2947, -980 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall13"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 10 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall13/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall13/Tree_T1/Area2D"]
+polygon = PoolVector2Array( 97, -74, 122, -226, 73, -385, 5, -420, -40, -378, -129, -424, -227, -173, -153, -32 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall13"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -56.9146, 358.443, -6.98975, 311.978, -10.9834, -243.387, -95.8564, -493.413, -133.799, -1141.71, -215.677, -1188.17, -391.414, -663.784, -292.562, 108.418, -133.799, 170.371 )
+
+[node name="Scenario Wall14" type="StaticBody2D" parent="World"]
+position = Vector2( 1931, 1063 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall14"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 14 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall14/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall14/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -111, 202, -118, 98, -15, 36, -98, -68, -98, -222, -10, -224, 25, -72, 75, -47, 75, 36, 115, 108, 108, 200, -19, 225 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall14"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -271.593, 28.7639, -98.8518, -30.9766, -144.783, -134.969, -329.506, -68.5908 )
+
+[node name="Scenario Wall15" type="StaticBody2D" parent="World"]
+position = Vector2( -1935, 1704 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall15"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 14 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall15/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall15/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -111, 202, -118, 98, -15, 36, -98, -68, -98, -222, -10, -224, 25, -72, 75, -47, 75, 36, 115, 108, 108, 200, -19, 225 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall15"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -271.593, 28.7639, -98.8518, -30.9766, -144.783, -134.969, -329.506, -68.5908 )
+
+[node name="Scenario Wall16" type="StaticBody2D" parent="World"]
+position = Vector2( 2510, 5344 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall16"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 14 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall16/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall16/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -111, 202, -118, 98, -15, 36, -98, -68, -98, -222, -10, -224, 25, -72, 75, -47, 75, 36, 115, 108, 108, 200, -19, 225 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall16"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -271.593, 28.7639, -98.8518, -30.9766, -144.783, -134.969, -329.506, -68.5908 )
+
+[node name="Scenario Wall17" type="StaticBody2D" parent="World"]
+position = Vector2( 6973, 969 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall17"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 14 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall17/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall17/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -111, 202, -118, 98, -15, 36, -98, -68, -98, -222, -10, -224, 25, -72, 75, -47, 75, 36, 115, 108, 108, 200, -19, 225 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall17"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -271.593, 28.7639, -98.8518, -30.9766, -144.783, -134.969, -329.506, -68.5908 )
+
+[node name="Attacks" type="Node" parent="."]
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="Player" parent="YSort" instance=ExtResource( 2 )]
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( -4243, -2186 )
+z_index = 1
 class_ = 1
 
 [node name="Enemies" type="YSort" parent="."]
 
-[node name="Enemy" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( 300, 300 )
+[node name="Enemy" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( -1797, -2134 )
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( -280, -1858 )
 class_ = 1
 
-[node name="Spawners" type="Node2D" parent="."]
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( -894, -1587 )
+class_ = 2
 
-[node name="Spawner" parent="Spawners" instance=ExtResource( 3 )]
-position = Vector2( -1068, -364 )
-max_enemies_alive = 1
+[node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 293, -1494 )
 
-[node name="Spawner2" parent="Spawners" instance=ExtResource( 3 )]
-position = Vector2( 759, 760 )
-max_enemies_alive = 0
+[node name="AreaMessagers" type="Node" parent="."]
 
-[node name="Spawner3" parent="Spawners" instance=ExtResource( 3 )]
-position = Vector2( 1558, -318 )
-max_enemies_alive = 0
+[node name="Area2D" type="Area2D" parent="AreaMessagers"]
+position = Vector2( -3054, -2122 )
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true
+}
+message = "Right click to attack."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaMessagers/Area2D"]
+shape = SubResource( 7 )
+
+[node name="Area2D2" type="Area2D" parent="AreaMessagers"]
+position = Vector2( -1551, -2046 )
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true
+}
+message = "Different classes have different weaknesses."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaMessagers/Area2D2"]
+shape = SubResource( 7 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 20 )
+
+[node name="Stats" type="Node2D" parent="HUD"]
+position = Vector2( 10, 10 )
+
+[node name="Icon" type="Sprite" parent="HUD/Stats"]
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 18 )
+centered = false
+
+[node name="StrengthIcon" type="Sprite" parent="HUD/Stats"]
+position = Vector2( 280, 57 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 19 )
+
+[node name="Level" type="Label" parent="HUD/Stats"]
+margin_left = 5.0
+margin_top = 90.0
+margin_right = 115.0
+margin_bottom = 120.0
+rect_scale = Vector2( 0.75, 0.75 )
+custom_fonts/font = ExtResource( 16 )
+text = "Level  1"
+
+[node name="Strength" type="Label" parent="HUD/Stats"]
+margin_left = 95.0
+margin_top = 50.0
+margin_right = 403.0
+margin_bottom = 84.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 16 )
+text = "Strong against"
+
+[node name="Kills" type="Node2D" parent="HUD/Stats"]
+position = Vector2( 0, 120 )
+
+[node name="Sprite" type="Sprite" parent="HUD/Stats/Kills"]
+texture = ExtResource( 17 )
+centered = false
+
+[node name="LevelUp" type="Control" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 6 )
+
+[node name="MessageSys" type="Label" parent="HUD/LevelUp"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -186.0
+margin_bottom = -38.0
+text = "Message Here"
+align = 1
+valign = 2
+script = ExtResource( 7 )
+
+[node name="Timer" type="Timer" parent="HUD/LevelUp/MessageSys"]
+wait_time = 5.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/LevelUp/MessageSys"]
+anims/RESET = SubResource( 3 )
+anims/show_off = SubResource( 4 )
+anims/show_up = SubResource( 5 )
+
+[node name="UpgradeSys" type="Control" parent="HUD/LevelUp"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Blur" type="ColorRect" parent="HUD/LevelUp/UpgradeSys"]
+material = SubResource( 9 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/LevelUp/UpgradeSys"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -104.0
+margin_bottom = 280.0
+custom_constants/separation = 30
+alignment = 1
+
+[node name="Panel" parent="HUD/LevelUp/UpgradeSys/HBoxContainer" instance=ExtResource( 15 )]
+margin_left = 325.0
+margin_right = 625.0
+
+[node name="Panel2" parent="HUD/LevelUp/UpgradeSys/HBoxContainer" instance=ExtResource( 15 )]
+margin_left = 655.0
+margin_right = 955.0
+
+[node name="Label" type="Label" parent="HUD/LevelUp/UpgradeSys"]
+anchor_right = 1.0
+margin_top = 64.0
+margin_bottom = 119.0
+text = "LEVEL UP"
+align = 1
+
+[node name="Label2" type="Label" parent="HUD/LevelUp/UpgradeSys"]
+anchor_right = 1.0
+margin_top = 104.0
+margin_bottom = 159.0
+text = "Choose an ability"
+align = 1
+
+[node name="GameOver" type="Control" parent="HUD"]
+visible = false
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD/GameOver"]
+margin_right = 1280.0
+margin_bottom = 360.0
+
+[node name="Label" type="Label" parent="HUD/GameOver/CenterContainer"]
+margin_left = 538.0
+margin_top = 163.0
+margin_right = 742.0
+margin_bottom = 197.0
+custom_fonts/font = ExtResource( 16 )
+text = "Game Over"
+align = 1
+valign = 1
+
+[connection signal="body_entered" from="World/Scenario Tree/Tree_T1/Area2D" to="World/Scenario Tree" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree/Tree_T1/Area2D" to="World/Scenario Tree" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree2/Tree_T1/Area2D" to="World/Scenario Tree2" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree2/Tree_T1/Area2D" to="World/Scenario Tree2" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall/Tree_T1/Area2D" to="World/Scenario Wall" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall/Tree_T1/Area2D" to="World/Scenario Wall" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall5/Tree_T1/Area2D" to="World/Scenario Wall5" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall5/Tree_T1/Area2D" to="World/Scenario Wall5" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree3/Tree_T1/Area2D" to="World/Scenario Tree3" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree3/Tree_T1/Area2D" to="World/Scenario Tree3" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree9/Tree_T1/Area2D" to="World/Scenario Tree9" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree9/Tree_T1/Area2D" to="World/Scenario Tree9" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree11/Tree_T1/Area2D" to="World/Scenario Tree11" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree11/Tree_T1/Area2D" to="World/Scenario Tree11" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree8/Tree_T1/Area2D" to="World/Scenario Tree8" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree8/Tree_T1/Area2D" to="World/Scenario Tree8" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree4/Tree_T1/Area2D" to="World/Scenario Tree4" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree4/Tree_T1/Area2D" to="World/Scenario Tree4" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall2/Tree_T1/Area2D" to="World/Scenario Wall2" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall2/Tree_T1/Area2D" to="World/Scenario Wall2" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree6/Tree_T1/Area2D" to="World/Scenario Tree6" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree6/Tree_T1/Area2D" to="World/Scenario Tree6" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree7/Tree_T1/Area2D" to="World/Scenario Tree7" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree7/Tree_T1/Area2D" to="World/Scenario Tree7" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree10/Tree_T1/Area2D" to="World/Scenario Tree10" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree10/Tree_T1/Area2D" to="World/Scenario Tree10" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree5/Tree_T1/Area2D" to="World/Scenario Tree5" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree5/Tree_T1/Area2D" to="World/Scenario Tree5" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall3/Tree_T1/Area2D" to="World/Scenario Wall3" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall3/Tree_T1/Area2D" to="World/Scenario Wall3" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall4/Tree_T1/Area2D" to="World/Scenario Wall4" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall4/Tree_T1/Area2D" to="World/Scenario Wall4" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall7/Tree_T1/Area2D" to="World/Scenario Wall7" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall7/Tree_T1/Area2D" to="World/Scenario Wall7" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall8/Tree_T1/Area2D" to="World/Scenario Wall8" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall8/Tree_T1/Area2D" to="World/Scenario Wall8" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall10/Tree_T1/Area2D" to="World/Scenario Wall10" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall10/Tree_T1/Area2D" to="World/Scenario Wall10" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall11/Tree_T1/Area2D" to="World/Scenario Wall11" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall11/Tree_T1/Area2D" to="World/Scenario Wall11" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall12/Tree_T1/Area2D" to="World/Scenario Wall12" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall12/Tree_T1/Area2D" to="World/Scenario Wall12" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall6/Tree_T1/Area2D" to="World/Scenario Wall6" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall6/Tree_T1/Area2D" to="World/Scenario Wall6" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall9/Tree_T1/Area2D" to="World/Scenario Wall9" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall9/Tree_T1/Area2D" to="World/Scenario Wall9" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree12/Tree_T1/Area2D" to="World/Scenario Tree12" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree12/Tree_T1/Area2D" to="World/Scenario Tree12" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree13/Tree_T1/Area2D" to="World/Scenario Tree13" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree13/Tree_T1/Area2D" to="World/Scenario Tree13" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree14/Tree_T1/Area2D" to="World/Scenario Tree14" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree14/Tree_T1/Area2D" to="World/Scenario Tree14" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree15/Tree_T1/Area2D" to="World/Scenario Tree15" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree15/Tree_T1/Area2D" to="World/Scenario Tree15" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree16/Tree_T1/Area2D" to="World/Scenario Tree16" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree16/Tree_T1/Area2D" to="World/Scenario Tree16" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall13/Tree_T1/Area2D" to="World/Scenario Wall13" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall13/Tree_T1/Area2D" to="World/Scenario Wall13" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall14/Tree_T1/Area2D" to="World/Scenario Wall14" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall14/Tree_T1/Area2D" to="World/Scenario Wall14" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall15/Tree_T1/Area2D" to="World/Scenario Wall15" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall15/Tree_T1/Area2D" to="World/Scenario Wall15" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall16/Tree_T1/Area2D" to="World/Scenario Wall16" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall16/Tree_T1/Area2D" to="World/Scenario Wall16" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall17/Tree_T1/Area2D" to="World/Scenario Wall17" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall17/Tree_T1/Area2D" to="World/Scenario Wall17" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="AreaMessagers/Area2D" to="AreaMessagers/Area2D" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="AreaMessagers/Area2D2" to="AreaMessagers/Area2D2" method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="HUD/LevelUp/MessageSys/Timer" to="HUD/LevelUp/MessageSys" method="_on_Timer_timeout"]

@@ -3,6 +3,7 @@ class_name Enemy
 
 var player = null
 var spawner = null
+var dead = false
 
 func init(spawner_: Spawner, enemy_class: int, pos: Vector2 = Vector2.ZERO):
 	self.spawner = spawner_
@@ -18,7 +19,7 @@ func _physics_process(delta):
 
 	# if player is on attack radius
 	if player_dist < Classes.attack_radius[class_]:
-		if cooldown.is_stopped():
+		if cooldown.is_stopped() and not dead:
 			var direction = player.position - position
 			attack(direction)
 		else:

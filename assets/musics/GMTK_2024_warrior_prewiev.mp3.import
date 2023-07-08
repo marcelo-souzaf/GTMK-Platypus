@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/GMTK_2024_warrior_prewiev.mp3-63a2ecc84b0e337f8c52b20210ed842c.mp3str"
+
+[deps]
+
+source_file="res://assets/musics/GMTK_2024_warrior_prewiev.mp3"
+dest_files=[ "res://.import/GMTK_2024_warrior_prewiev.mp3-63a2ecc84b0e337f8c52b20210ed842c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

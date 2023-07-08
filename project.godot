@@ -46,6 +46,7 @@ config/icon="res://icon.png"
 
 Game="*res://scripts/game.gd"
 Classes="*res://scripts/classes.gd"
+Music="*res://scenes/Music.tscn"
 
 [debug]
 

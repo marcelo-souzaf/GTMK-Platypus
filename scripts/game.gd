@@ -26,11 +26,14 @@ var score := 0
 var player: Player
 var game: Node2D
 var ui: CanvasLayer
+var attacks_container
+var message_sys
+var upgrade_sys
 
 func init(player_node: Player, game_node: Node2D):
 	game = game_node
 	player = player_node
-	ui = game.get_node("UI")
+	ui = game.get_node("HUD")
 	ui.init(health_bar_scene.instance())
 
 func _ready():
@@ -48,7 +51,7 @@ func _physics_process(_delta):
 		if mode >= Mode.LevelingUp:
 			get_tree().paused = true
 			if mode == Mode.GameOver:
-				game.get_node("UI/GameOver").show()
+				game.get_node("HUD/GameOver").show()
 		return
 	if frames_left % DECREASE_INTERVAL == 0:
 		Engine.time_scale *= DECREASE_FRACTION
@@ -60,6 +63,8 @@ func spawn_particles(position: Vector2):
 	game.add_child(particles)
 
 func transform_player_into(enemy):
+	enemy.dead = true
+	Music.play_music_for_class(enemy.class_)
 	frames_left = TRANSITION_DURATION
 
 	score += 1
@@ -69,7 +74,7 @@ func transform_player_into(enemy):
 		score = 0
 		player_level += 1
 		mode = Mode.LevelingUp
-		game.get_node("UI/LevelUp").show()
+		game.get_node("HUD/LevelUp").show()
 	
 	set_physics_process(true)
 	player.class_ = enemy.class_
@@ -88,3 +93,14 @@ func game_over():
 	frames_left = TRANSITION_DURATION * 3
 	mode = Mode.GameOver
 	set_physics_process(true)
+
+func show_upgrades():
+	upgrade_sys.show()
+	get_tree().paused = true
+
+func upgrade_selected(upgrade : int):
+	print(upgrade)
+	
+	upgrade_sys.hide()
+	get_tree().paused = false
+	pass

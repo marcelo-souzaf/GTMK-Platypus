@@ -6,8 +6,8 @@ onready var cooldown = $CooldownTimer
 var health_bar = null
 export var class_: int
 
-var health: int
-var max_health: int
+var health: int = 100
+var max_health: int = 100
 var max_speed: int
 var acceleration: int
 var is_player := false
@@ -21,8 +21,9 @@ func _ready():
 func attack(direction: Vector2):
 	cooldown.start(Classes.attack_cooldown[class_])
 	var attack = Classes.attacks[class_].instance()
+	attack.position = self.position
 	attack.init(direction, self.is_player)
-	add_child(attack)
+	Game.attacks_container.add_child(attack)
 
 func take_damage(amount: int, attacker_class: int):
 	var weakness: int = Classes.weakness[class_]
@@ -33,10 +34,12 @@ func take_damage(amount: int, attacker_class: int):
 	health_bar.update_bar(self)
 
 func update_stats():
-	self.health = Classes.health[class_]
+	self.health = (float(self.health) / self.max_health) * Classes.health[class_]
 	self.max_health = Classes.health[class_]
 	self.max_speed = Classes.max_speed[class_]
 	self.acceleration = Classes.acceleration[class_]
+	if self.is_player:
+		self.max_speed += 150
 
 func update_appearance():
 	self.sprite.frames = Classes.animations[class_]
