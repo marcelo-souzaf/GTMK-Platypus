@@ -14,9 +14,12 @@ func _physics_process(delta):
 	var player_dist = player.position.distance_to(position)
 
 	# if player is on attack radius
-	if player_dist < Classes.attack_radius[class_] and cooldown.is_stopped():
-		var direction = player.position - position
-		attack(direction)
+	if player_dist < Classes.attack_radius[class_]:
+		if cooldown.is_stopped():
+			var direction = player.position - position
+			attack(direction)
+		else:
+			idle(delta)
 	# if player is on sight radius
 	elif player_dist < Classes.sight_radius[class_]:
 		chase(delta)

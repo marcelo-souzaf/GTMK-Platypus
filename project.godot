@@ -41,6 +41,13 @@ config/icon="res://icon.png"
 Game="*res://scripts/game.gd"
 Classes="*res://scripts/classes.gd"
 
+[display]
+
+window/size/width=1080
+window/size/height=720
+window/size/test_width=1024
+window/size/test_height=600
+
 [global]
 
 warn=false
