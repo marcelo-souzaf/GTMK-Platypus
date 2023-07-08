@@ -2,75 +2,41 @@
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scripts/Spawner.gd" type="Script" id=3]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 400.0
+[ext_resource path="res://scenes/Spawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/bg_tile_r.png" type="Texture" id=4]
 
 [node name="Game" type="Node2D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -20.0
-margin_top = -19.0
-margin_right = 20.0
-margin_bottom = 21.0
+[node name="Background" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -4646.0
+margin_top = -2943.0
+margin_right = 4646.0
+margin_bottom = 2943.0
+texture = ExtResource( 4 )
+stretch_mode = 2
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 class_ = 1
 
-[node name="Enemy" parent="." instance=ExtResource( 2 )]
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 300, 300 )
 class_ = 1
 
-[node name="Spawner" type="Position2D" parent="."]
-position = Vector2( -447, -308 )
-scale = Vector2( 1.01451, 1.01359 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Node" type="Node" parent="."]
 
-[node name="SpawnArea" type="CollisionShape2D" parent="Spawner"]
-shape = SubResource( 1 )
+[node name="Spawner" parent="Node" instance=ExtResource( 3 )]
+position = Vector2( -1068, -364 )
 
-[node name="CooldownTimer" type="Timer" parent="Spawner"]
-wait_time = 4.0
-autostart = true
-
-[node name="Spawner2" type="Position2D" parent="."]
-position = Vector2( 1424, -6 )
-scale = Vector2( 1.01451, 1.01359 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Spawner2" parent="Node" instance=ExtResource( 3 )]
+position = Vector2( 759, 760 )
 classes_names = PoolStringArray( "Archer" )
 
-[node name="SpawnArea" type="CollisionShape2D" parent="Spawner2"]
-shape = SubResource( 1 )
-
-[node name="CooldownTimer" type="Timer" parent="Spawner2"]
-wait_time = 4.0
-autostart = true
-
-[node name="Spawner3" type="Position2D" parent="."]
-position = Vector2( -276, 1015 )
-scale = Vector2( 1.01451, 1.01359 )
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Spawner3" parent="Node" instance=ExtResource( 3 )]
+position = Vector2( 1558, -318 )
 classes_names = PoolStringArray( "Mage" )
-
-[node name="SpawnArea" type="CollisionShape2D" parent="Spawner3"]
-shape = SubResource( 1 )
-
-[node name="CooldownTimer" type="Timer" parent="Spawner3"]
-wait_time = 4.0
-autostart = true
-
-[node name="Enemies" type="Node" parent="."]
-
-[connection signal="timeout" from="Spawner/CooldownTimer" to="Spawner" method="_on_CooldownTimer_timeout"]
-[connection signal="timeout" from="Spawner2/CooldownTimer" to="Spawner2" method="_on_CooldownTimer_timeout"]
-[connection signal="timeout" from="Spawner3/CooldownTimer" to="Spawner3" method="_on_CooldownTimer_timeout"]

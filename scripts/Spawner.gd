@@ -2,7 +2,7 @@ extends Position2D
 
 onready var timer = $CooldownTimer
 onready var enemy = preload("res://Scenes/Enemy.tscn")
-onready var enemies_container = get_parent().get_node("Enemies")
+onready var enemies_container = get_parent().get_parent().get_node("Enemies")
 
 export var radius := 400
 export var min_player_distance := 1000
