@@ -5,8 +5,13 @@ onready var arrow = $Arrow
 const ARROW_SPEED = 1500
 
 var arrow_dir = Vector2.ZERO
+var by_player = false
 
 func _ready():
+	if by_player:
+		arrow.set_collision_mask_bit(0, false)
+	else:
+		arrow.set_collision_mask_bit(1, false)
 	attack(get_global_mouse_position())
 
 func attack(mouse_pos):
@@ -21,9 +26,10 @@ func _physics_process(delta):
 
 	if collision:
 		var body = collision.collider
-		if body.has_method("take_damage"):
-			body.take_damage()
-		queue_free()
+		if by_player and body != Game.player:
+			if body.has_method("take_damage"):
+					body.take_damage()
+			queue_free()
 
 
 

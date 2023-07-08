@@ -4,10 +4,15 @@ onready var attack_area : Area2D = $AttackArea
 
 const ATTACK_DURATION = 0.1
 
+var by_player = false
+
 func _ready():
+	if by_player:
+		attack_area.set_collision_mask_bit(1, false)
+	else:
+		attack_area.set_collision_mask_bit(2, false)
 	$AttackTimer.wait_time = ATTACK_DURATION
 	$AttackTimer.start()
-	attack(get_global_mouse_position())
 
 func attack(mouse_pos):
 	var direction = mouse_pos - position

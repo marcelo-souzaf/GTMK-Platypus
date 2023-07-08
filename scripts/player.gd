@@ -5,10 +5,15 @@ func _ready():
 	Game.player = self
 	Game.game = get_parent()
 
+	set_collision_layer_bit(0, true)
+	set_collision_mask_bit(0, true)
+	set_collision_layer_bit(1, false)
+	set_collision_mask_bit(1, false)
+
 func _process(delta):
 	# Attack
 	if Input.is_action_just_pressed("attack"):
-		self.attack()
+		self.attack(true)
 
 	# Movement
 	var moving = false

@@ -2,15 +2,20 @@ extends Node2D
 
 onready var fireball = $Fireball
 onready var attack_timer = $AttackTimer
-onready var explosion_area = $ExplosionArea
+onready var explosion_area = $Fireball/ExplosionArea
 
 const FIREBALL_SPEED = 600
 const ATTACK_DURATION = 0.1
 
 var fireball_dir = Vector2.ZERO
 var exploding = false
+var by_player = false
 
 func _ready():
+	if by_player:
+		fireball.set_collision_mask_bit(1, false)
+	else:
+		fireball.set_collision_mask_bit(2, false)
 	attack_timer.wait_time = ATTACK_DURATION
 	attack(get_global_mouse_position())
 
@@ -26,7 +31,9 @@ func _physics_process(delta):
 		var collision = fireball.move_and_collide(fireball_dir * FIREBALL_SPEED * delta)
 
 		if collision:
-			create_explosion()
+			var body = collision.collider
+			if by_player and body != Game.player:
+				create_explosion()
 	else:
 		for body in explosion_area.get_overlapping_bodies():
 			if body.has_method("take_damage"):
