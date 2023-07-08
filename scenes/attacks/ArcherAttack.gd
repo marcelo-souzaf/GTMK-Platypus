@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var damage := 100
+export var damage := 50
 
 const ARROW_SPEED = 1500
 
@@ -26,4 +26,7 @@ func _physics_process(delta):
 		if by_player and body != Game.player:
 			if body.has_method("take_damage"):
 				body.take_damage(damage, Classes.Archer)
-			queue_free()
+		elif not by_player and body == Game.player:
+			if body.has_method("take_damage"):
+				body.take_damage(damage, Classes.Archer)
+		queue_free()

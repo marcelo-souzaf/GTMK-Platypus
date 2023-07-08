@@ -31,7 +31,10 @@ func _physics_process(delta):
 
 		if collision:
 			var body = collision.collider
-			if by_player and body != Game.player:
+			if by_player:
+				if body != Game.player:
+					create_explosion()
+			else:
 				create_explosion()
 	else:
 		for body in explosion_area.get_overlapping_bodies():
