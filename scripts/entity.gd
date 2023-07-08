@@ -7,25 +7,21 @@ var class_: int = Classes.Archer
 var health: int = 100
 var max_speed: int = 300
 var acceleration: int = 800
+var is_player: bool = false
 
-var lin_speed = Vector2()
+var lin_speed = Vector2.ZERO
 
 func _ready():
 	pass
 
-func attack(dir : Vector2, by_player : bool = false):
+func attack(direction: Vector2):
 	var attack = Classes.attacks[class_].instance()
-	attack.by_player = by_player
+	attack.init(direction, self.is_player)
 	add_child(attack)
-	attack.attack(dir)
 
-func take_damage(amount : int = 100):
-	health -= amount
-	if health <= 0:
-		Game.transform_into(self)
+func take_damage(amount: int, attacker_class: int):
+	# TODO: update the lifebar
 
-func on_damage_taken():
-	pass
-
-func _process(delta):
-	pass
+	var weakness: int = Classes.weakness[class_]
+	# Doubles the damage if the entity is weak against the attacker's class
+	health -= amount * (1 + int(weakness == attacker_class or weakness == Classes.All))
