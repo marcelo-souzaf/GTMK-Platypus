@@ -45,6 +45,8 @@ func create_explosion():
 					continue
 				body.take_damage(Classes.damage[Classes.Mage] * 3, Classes.Mage)
 			else:
+				if body == Game.player:
+					continue
 				body.take_damage(Classes.damage[Classes.Mage], Classes.Mage)
 	attack_timer.start()
 	exploding = true

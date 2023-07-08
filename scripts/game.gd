@@ -34,6 +34,7 @@ func spawn_particles(position: Vector2):
 	game.add_child(particles)
 
 func transform_player_into(enemy):
+	Music.play_music_for_class(enemy.class_)
 	game.get_tree().paused = true
 
 	player.class_ = enemy.class_

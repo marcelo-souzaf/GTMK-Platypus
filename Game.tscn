@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/map_sprites/tree_1.png" type="Texture" id=11]
 [ext_resource path="res://assets/map_sprites/pine_3.png" type="Texture" id=12]
 [ext_resource path="res://scripts/area_messager.gd" type="Script" id=13]
+[ext_resource path="res://assets/map_sprites/ruin_5.png" type="Texture" id=14]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 51, 24 )
@@ -77,10 +78,35 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -5586.0
 margin_top = -3592.0
-margin_right = 4646.0
-margin_bottom = 2943.0
+margin_right = 11592.0
+margin_bottom = 8410.0
 texture = ExtResource( 4 )
 stretch_mode = 2
+
+[node name="Spawners" type="Node" parent="."]
+
+[node name="Spawner" parent="Spawners" instance=ExtResource( 3 )]
+position = Vector2( 1918, 1068 )
+radius = 1500
+min_player_distance = 1500
+classes_names = PoolStringArray( "Swordsman", "Mage", "Archer" )
+
+[node name="Spawner2" parent="Spawners" instance=ExtResource( 3 )]
+position = Vector2( -1921, 1673 )
+radius = 1000
+min_player_distance = 1500
+classes_names = PoolStringArray( "Mage" )
+
+[node name="Spawner3" parent="Spawners" instance=ExtResource( 3 )]
+position = Vector2( 2512, 5326 )
+radius = 1000
+min_player_distance = 1500
+
+[node name="Spawner4" parent="Spawners" instance=ExtResource( 3 )]
+position = Vector2( 6946, 912 )
+radius = 1000
+min_player_distance = 1500
+classes_names = PoolStringArray( "Archer" )
 
 [node name="World" type="Node" parent="."]
 
@@ -680,7 +706,7 @@ scale = Vector2( 1.0015, 0.451954 )
 polygon = PoolVector2Array( -56.9146, 358.443, -6.98975, 311.978, -10.9834, -243.387, -95.8564, -493.413, -133.799, -1141.71, -215.677, -1188.17, -391.414, -663.784, -292.562, 108.418, -133.799, 170.371 )
 
 [node name="Scenario Wall14" type="StaticBody2D" parent="World"]
-position = Vector2( 3188, -294 )
+position = Vector2( 1931, 1063 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
@@ -688,62 +714,20 @@ __meta__ = {
 
 [node name="Tree_T1" type="Sprite" parent="World/Scenario Wall14"]
 position = Vector2( 0, -200 )
-texture = ExtResource( 10 )
+texture = ExtResource( 14 )
 
 [node name="Area2D" type="Area2D" parent="World/Scenario Wall14/Tree_T1"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall14/Tree_T1/Area2D"]
-polygon = PoolVector2Array( 97, -74, 122, -226, 73, -385, 5, -420, -40, -378, -129, -424, -227, -173, -153, -32 )
+polygon = PoolVector2Array( -111, 202, -118, 98, -15, 36, -98, -68, -98, -222, -10, -224, 25, -72, 75, -47, 75, 36, 115, 108, 108, 200, -19, 225 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall14"]
 position = Vector2( 207, 12 )
 scale = Vector2( 1.0015, 0.451954 )
-polygon = PoolVector2Array( -56.9146, 358.443, -6.98975, 311.978, -10.9834, -243.387, -95.8564, -493.413, -133.799, -1141.71, -215.677, -1188.17, -391.414, -663.784, -292.562, 108.418, -133.799, 170.371 )
-
-[node name="Scenario Wall16" type="StaticBody2D" parent="World"]
-position = Vector2( 3163, 290 )
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall16"]
-position = Vector2( 0, -200 )
-texture = ExtResource( 10 )
-
-[node name="Area2D" type="Area2D" parent="World/Scenario Wall16/Tree_T1"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall16/Tree_T1/Area2D"]
-polygon = PoolVector2Array( 97, -74, 122, -226, 73, -385, 5, -420, -40, -378, -129, -424, -227, -173, -153, -32 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall16"]
-position = Vector2( 207, 12 )
-scale = Vector2( 1.0015, 0.451954 )
-polygon = PoolVector2Array( -56.9146, 358.443, -6.98975, 311.978, -10.9834, -243.387, -95.8564, -493.413, -133.799, -1141.71, -215.677, -1188.17, -391.414, -663.784, -292.562, 108.418, -133.799, 170.371 )
-
-[node name="Scenario Wall17" type="StaticBody2D" parent="World"]
-position = Vector2( 3181, 954 )
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall17"]
-position = Vector2( 0, -200 )
-texture = ExtResource( 10 )
-
-[node name="Area2D" type="Area2D" parent="World/Scenario Wall17/Tree_T1"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall17/Tree_T1/Area2D"]
-polygon = PoolVector2Array( 97, -74, 122, -226, 73, -385, 5, -420, -40, -378, -129, -424, -227, -173, -153, -32 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall17"]
-position = Vector2( 207, 12 )
-scale = Vector2( 1.0015, 0.451954 )
-polygon = PoolVector2Array( -56.9146, 358.443, -6.98975, 311.978, -10.9834, -243.387, -95.8564, -493.413, -133.799, -1141.71, -215.677, -1188.17, -391.414, -663.784, -292.562, 108.418, -133.799, 170.371 )
+polygon = PoolVector2Array( -271.593, 28.7639, -98.8518, -30.9766, -144.783, -134.969, -329.506, -68.5908 )
 
 [node name="Scenario Wall15" type="StaticBody2D" parent="World"]
-position = Vector2( -107, 62 )
+position = Vector2( -1935, 1704 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_group_": true
@@ -751,17 +735,59 @@ __meta__ = {
 
 [node name="Tree_T1" type="Sprite" parent="World/Scenario Wall15"]
 position = Vector2( 0, -200 )
-texture = ExtResource( 10 )
+texture = ExtResource( 14 )
 
 [node name="Area2D" type="Area2D" parent="World/Scenario Wall15/Tree_T1"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall15/Tree_T1/Area2D"]
-polygon = PoolVector2Array( 97, -74, 122, -226, 73, -385, 5, -420, -40, -378, -129, -424, -227, -173, -153, -32 )
+polygon = PoolVector2Array( -111, 202, -118, 98, -15, 36, -98, -68, -98, -222, -10, -224, 25, -72, 75, -47, 75, 36, 115, 108, 108, 200, -19, 225 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall15"]
 position = Vector2( 207, 12 )
 scale = Vector2( 1.0015, 0.451954 )
-polygon = PoolVector2Array( -56.9146, 358.443, -6.98975, 311.978, -10.9834, -243.387, -95.8564, -493.413, -133.799, -1141.71, -215.677, -1188.17, -391.414, -663.784, -292.562, 108.418, -133.799, 170.371 )
+polygon = PoolVector2Array( -271.593, 28.7639, -98.8518, -30.9766, -144.783, -134.969, -329.506, -68.5908 )
+
+[node name="Scenario Wall16" type="StaticBody2D" parent="World"]
+position = Vector2( 2510, 5344 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall16"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 14 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall16/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall16/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -111, 202, -118, 98, -15, 36, -98, -68, -98, -222, -10, -224, 25, -72, 75, -47, 75, 36, 115, 108, 108, 200, -19, 225 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall16"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -271.593, 28.7639, -98.8518, -30.9766, -144.783, -134.969, -329.506, -68.5908 )
+
+[node name="Scenario Wall17" type="StaticBody2D" parent="World"]
+position = Vector2( 6973, 969 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall17"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 14 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall17/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall17/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -111, 202, -118, 98, -15, 36, -98, -68, -98, -222, -10, -224, 25, -72, 75, -47, 75, 36, 115, 108, 108, 200, -19, 225 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall17"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -271.593, 28.7639, -98.8518, -30.9766, -144.783, -134.969, -329.506, -68.5908 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -4243, -2186 )
@@ -785,19 +811,6 @@ class_ = 2
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 293, -1494 )
-
-[node name="Spawners" type="Node" parent="."]
-
-[node name="Spawner" parent="Spawners" instance=ExtResource( 3 )]
-position = Vector2( -363, 1628 )
-
-[node name="Spawner2" parent="Spawners" instance=ExtResource( 3 )]
-position = Vector2( 1203, 1535 )
-classes_names = PoolStringArray( "Archer" )
-
-[node name="Spawner3" parent="Spawners" instance=ExtResource( 3 )]
-position = Vector2( 1713, 94 )
-classes_names = PoolStringArray( "Mage" )
 
 [node name="AreaMessagers" type="Node" parent="."]
 
@@ -910,12 +923,12 @@ anims/show_up = SubResource( 5 )
 [connection signal="body_exited" from="World/Scenario Wall13/Tree_T1/Area2D" to="World/Scenario Wall13" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="World/Scenario Wall14/Tree_T1/Area2D" to="World/Scenario Wall14" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="World/Scenario Wall14/Tree_T1/Area2D" to="World/Scenario Wall14" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall15/Tree_T1/Area2D" to="World/Scenario Wall15" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall15/Tree_T1/Area2D" to="World/Scenario Wall15" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="World/Scenario Wall16/Tree_T1/Area2D" to="World/Scenario Wall16" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="World/Scenario Wall16/Tree_T1/Area2D" to="World/Scenario Wall16" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="World/Scenario Wall17/Tree_T1/Area2D" to="World/Scenario Wall17" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="World/Scenario Wall17/Tree_T1/Area2D" to="World/Scenario Wall17" method="_on_Area2D_body_exited"]
-[connection signal="body_entered" from="World/Scenario Wall15/Tree_T1/Area2D" to="World/Scenario Wall15" method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="World/Scenario Wall15/Tree_T1/Area2D" to="World/Scenario Wall15" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="AreaMessagers/Area2D" to="AreaMessagers/Area2D" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="AreaMessagers/Area2D2" to="AreaMessagers/Area2D2" method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="HUD/Control/MessageSys/Timer" to="HUD/Control/MessageSys" method="_on_Timer_timeout"]

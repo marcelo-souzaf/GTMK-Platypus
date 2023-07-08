@@ -7,8 +7,8 @@ onready var healthbar_scene = preload("res://scenes/HealthBar.tscn")
 var healthbar = null
 export var class_: int
 
-var health: int
-var max_health: int
+var health: int = 100
+var max_health: int = 100
 var max_speed: int
 var acceleration: int
 var is_player := false
@@ -36,8 +36,7 @@ func take_damage(amount: int, attacker_class: int):
 	healthbar.update_bar(self)
 
 func update_stats():
-	# self.health = (self.health / self.max_health) * Classes.health[class_]
-	self.health = Classes.health[class_]
+	self.health = (float(self.health) / self.max_health) * Classes.health[class_]
 	self.max_health = Classes.health[class_]
 	self.max_speed = Classes.max_speed[class_]
 	self.acceleration = Classes.acceleration[class_]

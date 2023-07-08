@@ -24,7 +24,6 @@ func _ready():
 	timer.wait_time = rand_range(0.5, 1.5)
 	timer.start()
 
-
 func _on_CooldownTimer_timeout():
 	# if it's close enough to the player
 	if Game.player.position.distance_to(position) > min_player_distance:
