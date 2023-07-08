@@ -39,4 +39,4 @@ func _physics_process(delta):
 func take_damage(amount: int, attacker_class: int):
 	.take_damage(amount, attacker_class)
 	if health <= 0:
-		Game.game.game_over()
+		Game.game_over()

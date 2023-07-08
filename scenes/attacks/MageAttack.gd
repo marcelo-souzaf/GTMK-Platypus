@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 onready var attack_timer = $AttackTimer
-onready var explosion_area = $Fireball/ExplosionArea
+onready var explosion_area = $ExplosionArea
 
 export var damage := 100
 

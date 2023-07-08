@@ -11,6 +11,7 @@ func init(mouse_pos: Vector2, by_player_: bool, is_zombie_: bool = false):
 	self.is_zombie = is_zombie_
 
 func _ready():
+	$AttackTimer.start()
 	if by_player:
 		set_collision_mask_bit(1, true)
 		set_collision_mask_bit(2, false)

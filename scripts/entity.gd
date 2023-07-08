@@ -13,7 +13,7 @@ var is_player := false
 var lin_speed := Vector2.ZERO
 
 func _ready():
-	pass
+	update_appearance()
 
 func attack(direction: Vector2):
 	var attack = Classes.attacks[class_].instance()
@@ -33,3 +33,6 @@ func update_stats():
 	self.health = Classes.health[class_]
 	self.max_speed = Classes.max_speed[class_]
 	self.acceleration = Classes.acceleration[class_]
+
+func update_appearance():
+	self.sprite.frames = Classes.animations[class_]

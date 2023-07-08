@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/Spawner.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 400.0
 
 [node name="Game" type="Node2D"]
 
@@ -17,3 +21,56 @@ class_ = 1
 [node name="Enemy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 300, 300 )
 class_ = 1
+
+[node name="Spawner" type="Position2D" parent="."]
+position = Vector2( -447, -308 )
+scale = Vector2( 1.01451, 1.01359 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="SpawnArea" type="CollisionShape2D" parent="Spawner"]
+shape = SubResource( 1 )
+
+[node name="CooldownTimer" type="Timer" parent="Spawner"]
+wait_time = 4.0
+autostart = true
+
+[node name="Spawner2" type="Position2D" parent="."]
+position = Vector2( 1424, -6 )
+scale = Vector2( 1.01451, 1.01359 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+classes_names = PoolStringArray( "Archer" )
+
+[node name="SpawnArea" type="CollisionShape2D" parent="Spawner2"]
+shape = SubResource( 1 )
+
+[node name="CooldownTimer" type="Timer" parent="Spawner2"]
+wait_time = 4.0
+autostart = true
+
+[node name="Spawner3" type="Position2D" parent="."]
+position = Vector2( -276, 1015 )
+scale = Vector2( 1.01451, 1.01359 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+classes_names = PoolStringArray( "Mage" )
+
+[node name="SpawnArea" type="CollisionShape2D" parent="Spawner3"]
+shape = SubResource( 1 )
+
+[node name="CooldownTimer" type="Timer" parent="Spawner3"]
+wait_time = 4.0
+autostart = true
+
+[node name="Enemies" type="Node" parent="."]
+
+[connection signal="timeout" from="Spawner/CooldownTimer" to="Spawner" method="_on_CooldownTimer_timeout"]
+[connection signal="timeout" from="Spawner2/CooldownTimer" to="Spawner2" method="_on_CooldownTimer_timeout"]
+[connection signal="timeout" from="Spawner3/CooldownTimer" to="Spawner3" method="_on_CooldownTimer_timeout"]

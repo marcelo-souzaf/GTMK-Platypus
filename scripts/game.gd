@@ -37,6 +37,8 @@ func transform_player_into(enemy):
 	player.class_ = enemy.class_
 	# player.sprite.frames = sprites[player.class_]
 	# player.sprite.play("idle")
+	player.update_appearance()
+	player.update_stats()
 	spawn_particles(player.position)
 	player.position = enemy.position
 	player.lin_speed = enemy.lin_speed
