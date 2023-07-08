@@ -3,7 +3,7 @@ class_name Entity
 
 onready var sprite = $AnimatedSprite
 
-var class_: int = Classes.Mage
+var class_: int = Classes.Archer
 var health: int = 100
 var max_speed: int = 300
 var acceleration: int = 800
@@ -22,7 +22,7 @@ func attack(dir : Vector2, by_player : bool = false):
 func take_damage(amount : int = 100):
 	health -= amount
 	if health <= 0:
-		queue_free()
+		Game.transform_into(self)
 
 func on_damage_taken():
 	pass

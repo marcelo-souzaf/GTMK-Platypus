@@ -6,11 +6,6 @@ var player = null
 func _ready():
 	player = Game.player
 
-	set_collision_layer_bit(0, false)
-	set_collision_mask_bit(0, false)
-	set_collision_layer_bit(1, true)
-	set_collision_mask_bit(1, true)
-
 func _process(delta):
 	var player_dist = player.position.distance_to(position)
 

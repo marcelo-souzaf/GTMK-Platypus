@@ -1,7 +1,7 @@
 extends Camera2D
 
 func _ready():
-	pass
+	Game.cam = self
 
 func _process(delta):
 	position = Game.player.position
