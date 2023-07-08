@@ -1,6 +1,8 @@
 extends "./entity.gd"
 class_name Player
 
+var on_cooldown = false
+
 func _ready():
 	Game.player = self
 	Game.game = get_parent()
@@ -8,8 +10,9 @@ func _ready():
 
 func _physics_process(delta):
 	# Attack
-	if Input.is_action_just_pressed("attack"):
-		self.attack(get_global_mouse_position())
+	if Input.is_action_just_pressed("attack") and not on_cooldown:
+		var direction = get_global_mouse_position() - position
+		self.attack(direction)
 
 	# Movement
 	var moving := false

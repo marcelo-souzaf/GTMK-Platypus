@@ -7,8 +7,7 @@ const ARROW_SPEED = 1500
 var arrow_dir := Vector2.ZERO
 var by_player: bool
 
-func init(mouse_pos: Vector2, by_player_: bool):
-	var direction = mouse_pos - position
+func init(direction: Vector2, by_player_: bool):
 	arrow_dir = direction.normalized()
 
 	self.rotation = arrow_dir.angle()
@@ -27,5 +26,5 @@ func _physics_process(delta):
 		var body = collision.collider
 		if by_player and body != Game.player:
 			if body.has_method("take_damage"):
-				body.take_damage()
+				body.take_damage(damage, 0)
 			queue_free()

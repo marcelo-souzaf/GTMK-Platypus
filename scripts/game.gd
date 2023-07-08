@@ -30,10 +30,10 @@ func transform_player_into(enemy):
 	game.get_tree().paused = true
 
 	player.class_ = enemy.class_
-	player.sprite.frames = sprites[player.class_]
+	# player.sprite.frames = sprites[player.class_]
 	# player.sprite.play("idle")
-	spawn_particles(player.position)
 	player.position = enemy.position
+	spawn_particles(player.position)
 
 	enemy.queue_free()
-	set_physics_process(true)
+	game.get_tree().paused = false

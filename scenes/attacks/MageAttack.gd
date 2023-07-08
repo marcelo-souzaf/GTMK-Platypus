@@ -37,7 +37,7 @@ func _physics_process(delta):
 	else:
 		for body in explosion_area.get_overlapping_bodies():
 			if body.has_method("take_damage"):
-				body.take_damage()
+				body.take_damage(damage, 0)
 
 func create_explosion():
 	attack_timer.start()
