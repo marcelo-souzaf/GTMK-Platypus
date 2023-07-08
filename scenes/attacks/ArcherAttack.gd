@@ -1,36 +1,31 @@
-extends Node2D
+extends KinematicBody2D
 
-onready var arrow = $Arrow
+export var damage := 100
 
 const ARROW_SPEED = 1500
 
-var arrow_dir = Vector2.ZERO
-var by_player = false
+var arrow_dir := Vector2.ZERO
+var by_player: bool
+
+func init(mouse_pos: Vector2, by_player_: bool):
+	var direction = mouse_pos - position
+	arrow_dir = direction.normalized()
+
+	self.rotation = arrow_dir.angle()
+	self.by_player = by_player_
 
 func _ready():
 	if by_player:
-		arrow.set_collision_mask_bit(0, false)
+		set_collision_mask_bit(0, false)
 	else:
-		arrow.set_collision_mask_bit(1, false)
-
-func attack(mouse_pos):
-	var direction = mouse_pos - position
-	direction = direction.normalized()
-
-	arrow_dir = direction
-	arrow.rotation = direction.angle()
+		set_collision_mask_bit(1, false)
 
 func _physics_process(delta):
-	var collision = arrow.move_and_collide(arrow_dir * ARROW_SPEED * delta)
+	var collision = move_and_collide(arrow_dir * ARROW_SPEED * delta)
 
 	if collision:
 		var body = collision.collider
 		if by_player and body != Game.player:
 			if body.has_method("take_damage"):
-					body.take_damage()
+				body.take_damage()
 			queue_free()
-
-
-
-
-

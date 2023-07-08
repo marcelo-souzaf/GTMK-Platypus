@@ -6,7 +6,7 @@ var player = null
 func _ready():
 	player = Game.player
 
-func _process(delta):
+func _physics_process(delta):
 	var player_dist = player.position.distance_to(position)
 
 	# if player is on attack radius
@@ -20,6 +20,12 @@ func _process(delta):
 		idle(delta)
 	
 	lin_speed = move_and_slide(lin_speed)
+
+func take_damage(amount: int, attacker_class: int):
+	take_damage(amount, attacker_class)
+	if health <= 0:
+		Game.score += 1
+		Game.transform_player_into(self)
 
 func chase(delta):
 	var dir = (player.position - position).normalized()

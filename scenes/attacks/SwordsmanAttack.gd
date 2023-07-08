@@ -1,25 +1,19 @@
-extends Node2D
+extends Area2D
 
-onready var attack_area : Area2D = $AttackArea
+export var damage := 100
+var by_player: bool
 
-const ATTACK_DURATION = 0.1
-
-var by_player = false
+func init(mouse_pos: Vector2, by_player_: bool):
+	var direction = mouse_pos - position
+	self.rotation = direction.angle()
+	self.by_player = by_player_
 
 func _ready():
 	if by_player:
-		attack_area.set_collision_mask_bit(1, false)
-	else:
-		attack_area.set_collision_mask_bit(2, false)
-	$AttackTimer.wait_time = ATTACK_DURATION
-	$AttackTimer.start()
+		set_collision_mask_bit(1, false)
 
-func attack(mouse_pos):
-	var direction = mouse_pos - position
-	rotation = direction.angle()
-
-func _physics_process(delta):
-	for body in attack_area.get_overlapping_bodies():
+func _physics_process(_delta):
+	for body in self.get_overlapping_bodies():
 		if body.has_method("take_damage"):
 			body.take_damage()
 

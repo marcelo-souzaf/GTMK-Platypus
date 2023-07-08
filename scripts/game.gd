@@ -1,33 +1,39 @@
 extends Node
 
 const teleport_particles = preload("res://scenes/TeleportParticles.tscn")
+const sprites = []
+const TRANSITION_TIME = 0.25
+
+var time_left := TRANSITION_TIME
+var score := 0
 var player
 var game
-var cam
 
-var paused: bool = false
+func _ready():
+	self.pause_mode = Node.PAUSE_MODE_PROCESS
+	set_physics_process(false)
+
+func _physics_process(delta):
+	time_left -= delta
+	if time_left <= 0:
+		set_physics_process(false)
+		game.get_tree().paused = false
+		time_left = TRANSITION_TIME
+	Engine.set_time_scale(time_left / TRANSITION_TIME)
 
 func spawn_particles(position: Vector2):
 	var particles = teleport_particles.instance()
 	particles.position = position
 	game.add_child(particles)
 
-func transform_into(entity : Entity):
-	player.class_ = entity.class_
-
-	var placeholder = player.position
-	player.position = entity.position
-	entity.position = placeholder
-
-	cam.position = entity.position
-
-	entity.queue_free()
-
-func change_player_class(new_class: int, enemy: Entity):
+func transform_player_into(enemy):
 	game.get_tree().paused = true
-	player.class_ = new_class
+
+	player.class_ = enemy.class_
+	player.sprite.frames = sprites[player.class_]
+	# player.sprite.play("idle")
 	spawn_particles(player.position)
 	player.position = enemy.position
-	player.sprite.frames = enemy.sprite.frames
+
 	enemy.queue_free()
-	# yield(game.get_node("Camera2D").move(player.position), "tween_completed")
+	set_physics_process(true)
