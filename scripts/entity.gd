@@ -2,15 +2,15 @@ extends KinematicBody2D
 class_name Entity
 
 onready var sprite = $AnimatedSprite
-onready var cooldown_timer = $CooldownTimer
+onready var cooldown = $CooldownTimer
+export var class_: int
 
-var class_: int = Classes.Archer
-var health: int = 100
-var max_speed: int = 300
-var acceleration: int = 800
-var is_player: bool = false
+var health: int
+var max_speed: int
+var acceleration: int
+var is_player := false
 
-var lin_speed = Vector2.ZERO
+var lin_speed := Vector2.ZERO
 
 func _ready():
 	pass
@@ -20,11 +20,7 @@ func attack(direction: Vector2):
 	attack.init(direction, self.is_player)
 	add_child(attack)
 
-	self.on_cooldown = true
-	cooldown_timer.wait_time = Classes.attack_cooldown[class_]
-	cooldown_timer.start()
-	yield(cooldown_timer, "timeout")
-	self.on_cooldown = false
+	cooldown.start(Classes.attack_cooldown[class_])
 
 func take_damage(amount: int, attacker_class: int):
 	# TODO: update the lifebar
@@ -32,3 +28,8 @@ func take_damage(amount: int, attacker_class: int):
 	var weakness: int = Classes.weakness[class_]
 	# Doubles the damage if the entity is weak against the attacker's class
 	health -= amount * (1 + int(weakness == attacker_class or weakness == Classes.All))
+
+func update_stats():
+	self.health = Classes.health[class_]
+	self.max_speed = Classes.max_speed[class_]
+	self.acceleration = Classes.acceleration[class_]

@@ -2,7 +2,10 @@ extends "./entity.gd"
 class_name Enemy
 
 var player = null
-var on_cooldown = false
+
+func init(enemy_class: int):
+	self.class_ = enemy_class
+	update_stats()
 
 func _ready():
 	player = Game.player
@@ -11,7 +14,7 @@ func _physics_process(delta):
 	var player_dist = player.position.distance_to(position)
 
 	# if player is on attack radius
-	if player_dist < Classes.attack_radius[class_] and not on_cooldown:
+	if player_dist < Classes.attack_radius[class_] and cooldown.is_stopped():
 		var direction = player.position - position
 		attack(direction)
 	# if player is on sight radius
@@ -24,9 +27,7 @@ func _physics_process(delta):
 	lin_speed = move_and_slide(lin_speed)
 
 func take_damage(amount: int, attacker_class: int):
-	var weakness: int = Classes.weakness[class_]
-	# Doubles the damage if the entity is weak against the attacker's class
-	health -= amount * (1 + int(weakness == attacker_class or weakness == Classes.All))
+	.take_damage(amount, attacker_class)
 	
 	if health <= 0:
 		Game.score += 1

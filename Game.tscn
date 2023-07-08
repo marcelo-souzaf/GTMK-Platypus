@@ -1,20 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/characters/zombie.png" type="Texture" id=4]
-[ext_resource path="res://scripts/enemy.gd" type="Script" id=5]
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 38.0
-height = 14.0
+[ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
 
 [node name="Game" type="Node2D"]
 
@@ -25,22 +12,8 @@ margin_right = 20.0
 margin_bottom = 21.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
+class_ = 1
 
-[node name="Zombie" type="KinematicBody2D" parent="."]
-position = Vector2( 240, 134 )
-collision_layer = 2
-collision_mask = 3
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Zombie"]
-frames = SubResource( 1 )
-flip_h = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Zombie"]
-position = Vector2( 0, 16 )
-shape = SubResource( 3 )
-
-[node name="CooldownTimer" type="Timer" parent="Zombie"]
+[node name="Enemy" parent="." instance=ExtResource( 2 )]
+position = Vector2( 300, 300 )
+class_ = 1

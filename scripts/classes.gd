@@ -19,6 +19,7 @@ const attacks = [preload("res://scenes/attacks/SwordsmanAttack.tscn"),
 
 const acceleration = [800, 800, 800]
 const max_speed = [250, 350, 150]
+const health = [100, 90, 125, 75]
 const attack_cooldown = [0.2, 1, 1.5]
 const attack_radius = [50, 300, 150]
 const sight_radius = [200, 300, 400]

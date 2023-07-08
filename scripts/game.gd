@@ -2,7 +2,7 @@ extends Node
 
 const teleport_particles = preload("res://scenes/TeleportParticles.tscn")
 const sprites = []
-const TRANSITION_TIME = 0.25
+const TRANSITION_TIME = 1.0
 
 var time_left := TRANSITION_TIME
 var score := 0
@@ -10,15 +10,20 @@ var player
 var game
 
 func _ready():
-	self.pause_mode = Node.PAUSE_MODE_PROCESS
 	set_physics_process(false)
+	self.pause_mode = Node.PAUSE_MODE_PROCESS
 
 func _physics_process(delta):
 	time_left -= delta
 	if time_left <= 0:
 		set_physics_process(false)
-		game.get_tree().paused = false
 		time_left = TRANSITION_TIME
+		# If the game is transitioning the player into an enemy, resume the game
+		if game.get_tree().paused:
+			game.get_tree().paused = false
+		else:
+			game.get_tree().paused = true
+			# TODO: show game over screen
 	Engine.set_time_scale(time_left / TRANSITION_TIME)
 
 func spawn_particles(position: Vector2):
@@ -32,8 +37,12 @@ func transform_player_into(enemy):
 	player.class_ = enemy.class_
 	# player.sprite.frames = sprites[player.class_]
 	# player.sprite.play("idle")
-	player.position = enemy.position
 	spawn_particles(player.position)
+	player.position = enemy.position
+	player.lin_speed = enemy.lin_speed
 
 	enemy.queue_free()
 	game.get_tree().paused = false
+
+func game_over():
+	set_physics_process(true)

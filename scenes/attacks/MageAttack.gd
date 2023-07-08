@@ -21,8 +21,7 @@ func init(mouse_pos: Vector2, by_player_: bool):
 
 func _ready():
 	if by_player:
-		set_collision_mask_bit(1, false)
-	else:
+		set_collision_mask_bit(1, true)
 		set_collision_mask_bit(2, false)
 	attack_timer.wait_time = ATTACK_DURATION
 
@@ -37,7 +36,7 @@ func _physics_process(delta):
 	else:
 		for body in explosion_area.get_overlapping_bodies():
 			if body.has_method("take_damage"):
-				body.take_damage(damage, 0)
+				body.take_damage(damage, Classes.Mage)
 
 func create_explosion():
 	attack_timer.start()

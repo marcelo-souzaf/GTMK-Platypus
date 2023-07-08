@@ -15,9 +15,8 @@ func init(direction: Vector2, by_player_: bool):
 
 func _ready():
 	if by_player:
-		set_collision_mask_bit(0, false)
-	else:
-		set_collision_mask_bit(1, false)
+		set_collision_mask_bit(1, true)
+		set_collision_mask_bit(2, false)
 
 func _physics_process(delta):
 	var collision = move_and_collide(arrow_dir * ARROW_SPEED * delta)
@@ -26,5 +25,5 @@ func _physics_process(delta):
 		var body = collision.collider
 		if by_player and body != Game.player:
 			if body.has_method("take_damage"):
-				body.take_damage(damage, 0)
+				body.take_damage(damage, Classes.Archer)
 			queue_free()
