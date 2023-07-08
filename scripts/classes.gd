@@ -24,8 +24,9 @@ const animations = [preload("res://resources/animations/swordsman.tres"),
 					preload("res://resources/animations/zombie.tres")]
 
 const acceleration = [800, 800, 800, 100]
-const max_speed = [250, 350, 150, 200]
+const damage = [20, 40, 10, 10]
+const max_speed = [200, 150, 100, 200]
 const health = [100, 90, 125, 75]
 const attack_cooldown = [0.2, 1, 1.5, 0.1]
-const attack_radius = [100, 500, 300, 100]
+const attack_radius = [100, 500, 500, 100]
 const sight_radius = [1000, 700, 600, 2000]

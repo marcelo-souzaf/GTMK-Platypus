@@ -4,8 +4,7 @@ export var damage := 50
 var by_player: bool
 var is_zombie: bool
 
-func init(mouse_pos: Vector2, by_player_: bool, is_zombie_: bool = false):
-	var direction = mouse_pos - position
+func init(direction: Vector2, by_player_: bool, is_zombie_: bool = false):
 	self.rotation = direction.angle()
 	self.by_player = by_player_
 	self.is_zombie = is_zombie_
@@ -19,7 +18,10 @@ func _ready():
 func _physics_process(_delta):
 	for body in self.get_overlapping_bodies():
 		if body.has_method("take_damage"):
-			body.take_damage(damage, Classes.Zombie if is_zombie else Classes.Swordsman)
+			if by_player:
+				body.take_damage(Classes.damage[Classes.Swordsman] * 3, Classes.Swordsman)
+			else:
+				body.take_damage(damage, Classes.Zombie if is_zombie else Classes.Swordsman)
 
 func _on_AttackTimer_timeout():
 	queue_free()

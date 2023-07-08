@@ -8,6 +8,8 @@ var time_left := TRANSITION_TIME
 var score := 0
 var player
 var game
+var attacks_container
+var message_sys
 
 func _ready():
 	set_physics_process(false)

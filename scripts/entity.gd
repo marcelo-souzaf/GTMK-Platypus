@@ -21,8 +21,9 @@ func _ready():
 
 func attack(direction: Vector2):
 	var attack = Classes.attacks[class_].instance()
+	attack.position = self.position
 	attack.init(direction, self.is_player)
-	add_child(attack)
+	Game.attacks_container.add_child(attack)
 
 	cooldown.start(Classes.attack_cooldown[class_])
 
@@ -35,10 +36,13 @@ func take_damage(amount: int, attacker_class: int):
 	healthbar.update_bar(self)
 
 func update_stats():
+	# self.health = (self.health / self.max_health) * Classes.health[class_]
 	self.health = Classes.health[class_]
 	self.max_health = Classes.health[class_]
 	self.max_speed = Classes.max_speed[class_]
 	self.acceleration = Classes.acceleration[class_]
+	if self.is_player:
+		self.max_speed += 150
 
 func update_appearance():
 	self.sprite.frames = Classes.animations[class_]
