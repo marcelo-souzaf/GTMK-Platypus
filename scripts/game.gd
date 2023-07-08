@@ -10,6 +10,7 @@ var player
 var game
 var attacks_container
 var message_sys
+var upgrade_sys
 
 func _ready():
 	set_physics_process(false)
@@ -51,3 +52,14 @@ func transform_player_into(enemy):
 
 func game_over():
 	set_physics_process(true)
+
+func show_upgrades():
+	upgrade_sys.show()
+	get_tree().paused = true
+
+func upgrade_selected(upgrade : int):
+	print(upgrade)
+	
+	upgrade_sys.hide()
+	get_tree().paused = false
+	pass

@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/music.gd" type="Script" id=5]
 
 [node name="Node2D" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 5 )
 
 [node name="MusicS" type="AudioStreamPlayer" parent="."]

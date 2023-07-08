@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://assets/map_sprites/pine_3.png" type="Texture" id=12]
 [ext_resource path="res://scripts/area_messager.gd" type="Script" id=13]
 [ext_resource path="res://assets/map_sprites/ruin_5.png" type="Texture" id=14]
+[ext_resource path="res://scenes/UpgradePanel.tscn" type="PackedScene" id=15]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 51, 24 )
@@ -67,6 +68,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
+
+[sub_resource type="Shader" id=8]
+code = "shader_type canvas_item;
+
+uniform float lod: hint_range(0.0, 5) = 2.0;
+
+void fragment(){
+	vec4 color = texture(SCREEN_TEXTURE, SCREEN_UV, lod);
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+shader_param/lod = 2.0
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 8 )
@@ -862,6 +877,47 @@ one_shot = true
 anims/RESET = SubResource( 3 )
 anims/show_off = SubResource( 4 )
 anims/show_up = SubResource( 5 )
+
+[node name="UpgradeSys" type="Control" parent="HUD/Control"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Blur" type="ColorRect" parent="HUD/Control/UpgradeSys"]
+material = SubResource( 9 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/UpgradeSys"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -104.0
+margin_bottom = 280.0
+custom_constants/separation = 30
+alignment = 1
+
+[node name="Panel" parent="HUD/Control/UpgradeSys/HBoxContainer" instance=ExtResource( 15 )]
+
+[node name="Panel2" parent="HUD/Control/UpgradeSys/HBoxContainer" instance=ExtResource( 15 )]
+margin_left = 555.0
+margin_right = 855.0
+
+[node name="Label" type="Label" parent="HUD/Control/UpgradeSys"]
+anchor_right = 1.0
+margin_top = 64.0
+margin_bottom = 119.0
+text = "LEVEL UP"
+align = 1
+
+[node name="Label2" type="Label" parent="HUD/Control/UpgradeSys"]
+anchor_right = 1.0
+margin_top = 104.0
+margin_bottom = 159.0
+text = "Choose an ability"
+align = 1
 
 [connection signal="body_entered" from="World/Scenario Tree/Tree_T1/Area2D" to="World/Scenario Tree" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="World/Scenario Tree/Tree_T1/Area2D" to="World/Scenario Tree" method="_on_Area2D_body_exited"]

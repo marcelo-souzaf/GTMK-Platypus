@@ -14,7 +14,3 @@ func play_music_for_class(class_ : int):
 		Classes.Swordsman:
 			$MusicS.volume_db = -5
 
-func _process(delta):
-	print("sounds:")
-	for music in [$MusicA, $MusicM, $MusicS]:
-		print(music.volume_db)
