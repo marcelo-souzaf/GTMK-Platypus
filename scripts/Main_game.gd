@@ -14,4 +14,5 @@ func call_wave():
 		spawn.call_wave(Game.wave)
 
 func retry():
+	print("Click")
 	get_tree().reload_current_scene()

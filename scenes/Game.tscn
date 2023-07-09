@@ -990,8 +990,32 @@ margin_bottom = 159.0
 text = "Choose an ability"
 align = 1
 
-[node name="GameOver" type="Control" parent="HUD"]
+[node name="Pause" type="Control" parent="HUD"]
 visible = false
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="Blur" type="ColorRect" parent="HUD/Pause"]
+material = SubResource( 11 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="HUD/Pause"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -102.0
+margin_top = -17.0
+margin_right = 102.0
+margin_bottom = 17.0
+custom_fonts/font = ExtResource( 16 )
+text = "Paused
+"
+align = 1
+valign = 1
+
+[node name="GameOver" type="Control" parent="HUD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 6 )
@@ -1000,7 +1024,6 @@ theme = ExtResource( 6 )
 material = SubResource( 9 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
 
 [node name="Label" type="Label" parent="HUD/GameOver"]
 anchor_left = 0.5
@@ -1024,32 +1047,6 @@ margin_bottom = 515.0
 rect_min_size = Vector2( 1080, 0 )
 custom_fonts/font = ExtResource( 16 )
 text = "Retry"
-
-[node name="Pause" type="Control" parent="HUD"]
-visible = false
-margin_right = 1280.0
-margin_bottom = 720.0
-
-[node name="Blur" type="ColorRect" parent="HUD/Pause"]
-material = SubResource( 11 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="HUD/Pause"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -102.0
-margin_top = -17.0
-margin_right = 102.0
-margin_bottom = 17.0
-custom_fonts/font = ExtResource( 16 )
-text = "Paused
-"
-align = 1
-valign = 1
 
 [connection signal="body_entered" from="World/Scenario Tree/Tree_T1/Area2D" to="World/Scenario Tree" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="World/Scenario Tree/Tree_T1/Area2D" to="World/Scenario Tree" method="_on_Area2D_body_exited"]
