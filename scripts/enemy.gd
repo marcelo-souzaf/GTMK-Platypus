@@ -52,6 +52,10 @@ func chase(delta):
 	else:
 		sprite.animation = "walk"
 	var dir = (player.position - position).normalized()
+	if dir.x < 0:
+		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
 	lin_speed += dir * Classes.acceleration[class_] * delta
 	lin_speed = lin_speed.limit_length(Classes.max_speed[class_])
 
