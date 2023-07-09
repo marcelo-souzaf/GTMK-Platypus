@@ -4,8 +4,6 @@ const empty = preload("res://assets/ui/Icon_Kill_Empty_32.png")
 const full = preload("res://assets/ui/Icon_Kill_Full_32.png")
 
 onready var kills = $Stats/Kills
-onready var strength = $Stats/Strength
-onready var strength_icon = $Stats/StrengthIcon
 
 var slot: Sprite
 var width: float
@@ -37,7 +35,7 @@ func update_skulls():
 func update_stats(class_: int):
 	$Stats/Icon.texture = Classes.icons[class_]
 	var strong_against = Classes.weakness.find(class_)
-	strength_icon = Classes.icons[strong_against]
+	$Stats/StrengthIcon.texture = Classes.icons[strong_against]
 
 	$Stats/Level.text = "Level  %d" % Game.player_level
 	if Game.score > 0:

@@ -3,6 +3,8 @@ extends Area2D
 var by_player: bool
 var class_: int
 
+var entities_hit = []
+
 func init(direction: Vector2, by_player_: bool, is_zombie_: bool = false):
 	self.rotation = direction.angle()
 	self.by_player = by_player_
@@ -16,7 +18,8 @@ func _ready():
 
 func _physics_process(_delta):
 	for body in self.get_overlapping_bodies():
-		if body.has_method("take_damage"):
+		if body.has_method("take_damage") and not body in entities_hit:
+			entities_hit.append(body)
 			if by_player:
 				body.take_damage(Classes.damage[class_] * 3, class_)
 			else:

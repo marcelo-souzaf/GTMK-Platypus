@@ -133,6 +133,29 @@ class_names = PoolStringArray( "Archer" )
 
 [node name="Attacks" type="Node" parent="."]
 
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( -4192, -2140 )
+z_index = 1
+class_ = 1
+
+[node name="Enemies" type="YSort" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( -1797, -2134 )
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( -280, -1858 )
+class_ = 1
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( -894, -1587 )
+class_ = 2
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 293, -1494 )
+
 [node name="World" type="YSort" parent="."]
 
 [node name="Scenario Tree" type="StaticBody2D" parent="World"]
@@ -813,29 +836,6 @@ polygon = PoolVector2Array( -111, 202, -118, 98, -15, 36, -98, -68, -98, -222, -
 position = Vector2( 207, 12 )
 scale = Vector2( 1.0015, 0.451954 )
 polygon = PoolVector2Array( -271.593, 28.7639, -98.8518, -30.9766, -144.783, -134.969, -329.506, -68.5908 )
-
-[node name="YSort" type="YSort" parent="."]
-
-[node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( -4192, -2140 )
-z_index = 1
-class_ = 1
-
-[node name="Enemies" type="YSort" parent="."]
-
-[node name="Enemy" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( -1797, -2134 )
-
-[node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( -280, -1858 )
-class_ = 1
-
-[node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( -894, -1587 )
-class_ = 2
-
-[node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( 293, -1494 )
 
 [node name="AreaMessagers" type="Node" parent="."]
 

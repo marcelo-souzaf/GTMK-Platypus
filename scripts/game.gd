@@ -65,19 +65,19 @@ func _physics_process(_delta):
 	Engine.time_scale *= 0.9
 	frames_left -= 1
 
-func spawn_particles(position: Vector2, type = 'teleport_particles'):
+func spawn_particles(position: Vector2, type = "teleport_particles"):
 	var particles
 	match type:
-		'teleport_particles':
+		"teleport_particles":
 			particles = teleport_particles.instance()
-		'death_particles':
+		"death_particles":
 			particles = death_particles.instance()
 	particles.position = position
 	game.add_child(particles)
 
 func transform_player_into(enemy):
-	spawn_particles(enemy.position, 'death_particles')
 	Music.play_music_for_class(enemy.class_)
+	spawn_particles(enemy.position, "death_particles")
 	frames_left = TRANSITION_DURATION
 
 	score += 1
@@ -96,16 +96,14 @@ func transform_player_into(enemy):
 		mode = Mode.LevelingUp
 		game.get_node("HUD/LevelUp").show()
 	
-	
 	player.class_ = enemy.class_
-	player.update_appearance()
 	player.update_stats()
-
+	player.update_appearance()
+	player.position = enemy.position
+	player.lin_speed = enemy.lin_speed
 	player.health_bar.init(player)
 	ui.health_bar.init(player)
 	spawn_particles(player.position)
-	player.position = enemy.position
-	player.lin_speed = enemy.lin_speed
 	player.become_invulnerable()
 
 	enemy.queue_free()
