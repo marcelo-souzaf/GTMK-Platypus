@@ -1,6 +1,7 @@
 extends Node
 
 func start():
+	$MusicBase.play()
 	for i in range(3):
 		get_child(i).play()
 	

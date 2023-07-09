@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/GMTK 2024 intro.mp3-6674bb961e806153cbe9bc0d7a08e6f8.mp3str"
+
+[deps]
+
+source_file="res://assets/music/GMTK 2024 intro.mp3"
+dest_files=[ "res://.import/GMTK 2024 intro.mp3-6674bb961e806153cbe9bc0d7a08e6f8.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

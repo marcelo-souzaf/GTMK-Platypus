@@ -1,13 +1,14 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://assets/music/GMTK_2024_test.mp3" type="AudioStream" id=1]
-[ext_resource path="res://assets/music/GMTK_2024_Archer_prewiev.mp3" type="AudioStream" id=2]
-[ext_resource path="res://assets/music/GMTK_2024_Wizard_prewiev.mp3" type="AudioStream" id=3]
-[ext_resource path="res://assets/music/GMTK_2024_warrior_prewiev.mp3" type="AudioStream" id=4]
+[ext_resource path="res://assets/music/GMTK 2024 final base mix warrior.mp3" type="AudioStream" id=1]
+[ext_resource path="res://assets/music/GMTK 2024 final base mix.mp3" type="AudioStream" id=2]
+[ext_resource path="res://assets/music/GMTK 2024 final base mix wizard.mp3" type="AudioStream" id=3]
+[ext_resource path="res://assets/music/GMTK 2024 intro.mp3" type="AudioStream" id=4]
 [ext_resource path="res://scripts/music.gd" type="Script" id=5]
 [ext_resource path="res://assets/sfx/upgrade.mp3" type="AudioStream" id=6]
 [ext_resource path="res://assets/sfx/hover.mp3" type="AudioStream" id=7]
 [ext_resource path="res://assets/sfx/click.mp3" type="AudioStream" id=8]
+[ext_resource path="res://assets/music/GMTK 2024 final base mix Archer.mp3" type="AudioStream" id=9]
 [ext_resource path="res://assets/sfx/attackA.mp3" type="AudioStream" id=10]
 [ext_resource path="res://assets/sfx/attackM.mp3" type="AudioStream" id=11]
 [ext_resource path="res://assets/sfx/attackS.mp3" type="AudioStream" id=12]
@@ -18,11 +19,11 @@ pause_mode = 2
 script = ExtResource( 5 )
 
 [node name="MusicS" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
+stream = ExtResource( 1 )
 volume_db = -80.0
 
 [node name="MusicA" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
+stream = ExtResource( 9 )
 volume_db = -80.0
 
 [node name="MusicM" type="AudioStreamPlayer" parent="."]
@@ -30,7 +31,7 @@ stream = ExtResource( 3 )
 volume_db = -80.0
 
 [node name="MusicBase" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 1 )
+stream = ExtResource( 2 )
 volume_db = -10.0
 
 [node name="Effects" type="Node" parent="."]
@@ -57,3 +58,8 @@ stream = ExtResource( 11 )
 
 [node name="AttackSHit" type="AudioStreamPlayer" parent="Attacks"]
 stream = ExtResource( 13 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.0
+autoplay = true

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/GMTK 2024 final base mix Archer.mp3-8e5331484056bdf2175873ae696281c9.mp3str"
+
+[deps]
+
+source_file="res://assets/music/GMTK 2024 final base mix Archer.mp3"
+dest_files=[ "res://.import/GMTK 2024 final base mix Archer.mp3-8e5331484056bdf2175873ae696281c9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

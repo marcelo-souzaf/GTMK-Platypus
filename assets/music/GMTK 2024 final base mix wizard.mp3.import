@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/GMTK 2024 final base mix wizard.mp3-6f7954699bc146a5ad499f09de90266d.mp3str"
+
+[deps]
+
+source_file="res://assets/music/GMTK 2024 final base mix wizard.mp3"
+dest_files=[ "res://.import/GMTK 2024 final base mix wizard.mp3-6f7954699bc146a5ad499f09de90266d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

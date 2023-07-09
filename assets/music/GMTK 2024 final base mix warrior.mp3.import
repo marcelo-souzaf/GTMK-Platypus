@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/GMTK 2024 final base mix warrior.mp3-28e54fdabfc1f962b738bab3a0530fe4.mp3str"
+
+[deps]
+
+source_file="res://assets/music/GMTK 2024 final base mix warrior.mp3"
+dest_files=[ "res://.import/GMTK 2024 final base mix warrior.mp3-28e54fdabfc1f962b738bab3a0530fe4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
