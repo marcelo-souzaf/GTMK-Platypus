@@ -13,6 +13,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("attack") and cooldown.is_stopped():
 		var direction = get_global_mouse_position() - position
 		self.attack(direction)
+		sprite.animation = "attack"
 
 	# Movement
 	var moving := false
@@ -32,7 +33,16 @@ func _physics_process(delta):
 		moving = true
 	# Deaccelerate
 	if not moving:
+		if sprite.animation == "attack":
+			pass
+		else:
+			sprite.animation = "default"
 		lin_speed = lin_speed.linear_interpolate(Vector2.ZERO, 0.2)
+	else:
+		if sprite.animation == "attack":
+			pass
+		else:
+			sprite.animation = "walk"
 	
 	lin_speed = lin_speed.limit_length(max_speed)
 	lin_speed = move_and_slide(lin_speed)
@@ -54,3 +64,8 @@ func take_damage(amount: int, attacker_class: int):
 
 func _on_Invulnerability_timeout():
 	sprite.material = null
+
+
+func _on_AnimatedSprite_animation_finished():
+	if sprite.animation == "attack":
+		sprite.animation = "default"

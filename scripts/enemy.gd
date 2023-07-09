@@ -26,6 +26,7 @@ func _physics_process(delta):
 		if cooldown.is_stopped():
 			var direction = player.position - position
 			attack(direction)
+			sprite.animation = "attack"
 		else:
 			idle(delta)
 	# if player is on sight radius
@@ -46,9 +47,22 @@ func take_damage(amount: int, attacker_class: int):
 		Game.transform_player_into(self)
 
 func chase(delta):
+	if sprite.animation == "attack":
+		pass
+	else:
+		sprite.animation = "walk"
 	var dir = (player.position - position).normalized()
 	lin_speed += dir * Classes.acceleration[class_] * delta
 	lin_speed = lin_speed.limit_length(Classes.max_speed[class_])
 
 func idle(_delta):
+	if sprite.animation == "attack":
+		pass
+	else:
+		sprite.animation = "default"
 	lin_speed = lin_speed.linear_interpolate(Vector2(), 0.2)
+
+
+func _on_AnimatedSprite_animation_finished():
+	if sprite.animation == "attack":
+		sprite.play("default")
