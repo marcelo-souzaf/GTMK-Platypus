@@ -196,14 +196,14 @@ __meta__ = {
 }
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
-margin_right = 102.0
-margin_bottom = 22.0
+margin_right = 126.0
+margin_bottom = 49.0
 text = "Play"
 
 [node name="AboutButton" type="Button" parent="VBoxContainer"]
-margin_top = 26.0
-margin_right = 102.0
-margin_bottom = 48.0
+margin_top = 53.0
+margin_right = 126.0
+margin_bottom = 102.0
 text = "About"
 
 [node name="ColorRect" type="ColorRect" parent="."]
