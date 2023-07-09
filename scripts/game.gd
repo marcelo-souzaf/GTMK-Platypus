@@ -38,6 +38,9 @@ var wave = 1
 
 var player_damage = 3
 var player_boost_speed = 150
+var arrow_speed_boost = 0
+var swordsman_speed = 0
+var mage_damage = 0
 
 func init(player_node: Player, game_node: Node2D):
 	game = game_node
@@ -141,6 +144,12 @@ func upgrade_selected(upgrade : int):
 			player_damage += 0.2
 		2:
 			player_boost_speed += 20
+		3:
+			arrow_speed_boost += 100
+		4:
+			swordsman_speed += 40
+		5:
+			mage_damage += 0.4
 
 func call_wave():
 	enemy_count = 0

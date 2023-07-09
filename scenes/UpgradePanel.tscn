@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://resources/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/upgrade_panel.gd" type="Script" id=2]
-[ext_resource path="res://assets/buttons/Ability_Panel_A_Facused.png" type="Texture" id=3]
-[ext_resource path="res://assets/buttons/Ability_Panel_A_Default.png" type="Texture" id=4]
+[ext_resource path="res://assets/panels/Ability_Panel_A_Facused.png" type="Texture" id=3]
+[ext_resource path="res://assets/panels/Ability_Panel_A_Default.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/fonts/Chilet.otf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 17
+font_data = SubResource( 1 )
 
 [node name="Panel" type="TextureButton"]
 margin_left = 225.0
@@ -23,6 +30,7 @@ margin_left = 15.0
 margin_top = 24.0
 margin_right = -15.0
 margin_bottom = -24.0
+custom_constants/separation = 20
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 margin_right = 270.0
@@ -32,10 +40,11 @@ text = "Archer: You can Now Breathe"
 autowrap = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
-margin_top = 65.0
+margin_top = 81.0
 margin_right = 270.0
-margin_bottom = 95.0
+margin_bottom = 127.0
 mouse_filter = 1
+custom_fonts/normal_font = SubResource( 2 )
 text = "Lorem ipsum asdlasjd asldjk alskdjklas asldkjas"
 fit_content_height = true
 

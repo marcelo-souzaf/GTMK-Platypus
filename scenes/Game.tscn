@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
@@ -23,6 +23,12 @@
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 51, 24 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 8589, 10 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 10, 6001 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 104, 354 )
@@ -885,6 +891,66 @@ polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 7
 position = Vector2( -4, -46 )
 shape = SubResource( 6 )
 
+[node name="Scenario Tree33" type="StaticBody2D" parent="World"]
+position = Vector2( 1016, -598 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree33"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree33/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree33/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree33"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree34" type="StaticBody2D" parent="World"]
+position = Vector2( 2200, 236 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree34"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree34/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree34/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree34"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree35" type="StaticBody2D" parent="World"]
+position = Vector2( 3142, 48 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree35"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree35/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree35/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree35"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
 [node name="Scenario Tree18" type="StaticBody2D" parent="World"]
 position = Vector2( 3312, 569 )
 script = ExtResource( 5 )
@@ -962,6 +1028,26 @@ texture = ExtResource( 11 )
 polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree28"]
+position = Vector2( -4, -46 )
+shape = SubResource( 6 )
+
+[node name="Scenario Tree36" type="StaticBody2D" parent="World"]
+position = Vector2( 5254, -554 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Tree36"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Tree36/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Tree36/Tree_T1/Area2D"]
+polygon = PoolVector2Array( -55, 149, -50, 82, -133, 47, -141, -94, -58, -198, 73, -188, 145, -65, 102, 53, 33, 87, 36, 160 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Scenario Tree36"]
 position = Vector2( -4, -46 )
 shape = SubResource( 6 )
 
@@ -1290,6 +1376,27 @@ position = Vector2( 207, 12 )
 scale = Vector2( 1.0015, 0.451954 )
 polygon = PoolVector2Array( -56.9146, 358.443, -6.98975, 311.978, -10.9834, -243.387, -95.8564, -493.413, -133.799, -1141.71, -215.677, -1188.17, -391.414, -663.784, -292.562, 108.418, -133.799, 170.371 )
 
+[node name="Scenario Wall29" type="StaticBody2D" parent="World"]
+position = Vector2( 4370, 1261 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tree_T1" type="Sprite" parent="World/Scenario Wall29"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 10 )
+
+[node name="Area2D" type="Area2D" parent="World/Scenario Wall29/Tree_T1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall29/Tree_T1/Area2D"]
+polygon = PoolVector2Array( 97, -74, 122, -226, 73, -385, 5, -420, -40, -378, -129, -424, -227, -173, -153, -32 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Scenario Wall29"]
+position = Vector2( 207, 12 )
+scale = Vector2( 1.0015, 0.451954 )
+polygon = PoolVector2Array( -56.9146, 358.443, -6.98975, 311.978, -10.9834, -243.387, -95.8564, -493.413, -133.799, -1141.71, -215.677, -1188.17, -391.414, -663.784, -292.562, 108.418, -133.799, 170.371 )
+
 [node name="Scenario Wall28" type="StaticBody2D" parent="World"]
 position = Vector2( -442, 4496 )
 script = ExtResource( 5 )
@@ -1394,6 +1501,32 @@ polygon = PoolVector2Array( -111, 202, -118, 98, -15, 36, -98, -68, -98, -222, -
 position = Vector2( 207, 12 )
 scale = Vector2( 1.0015, 0.451954 )
 polygon = PoolVector2Array( -271.593, 28.7639, -98.8518, -30.9766, -144.783, -134.969, -329.506, -68.5908 )
+
+[node name="Walls" type="YSort" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
+position = Vector2( 3003, -3000 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+shape = SubResource( 12 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls"]
+position = Vector2( 3003, 8000 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2"]
+shape = SubResource( 12 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls"]
+position = Vector2( -5000, 2409 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D3"]
+shape = SubResource( 13 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls"]
+position = Vector2( 11000, 2409 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4"]
+shape = SubResource( 13 )
 
 [node name="AreaMessagers" type="Node" parent="."]
 
@@ -1569,6 +1702,7 @@ align = 1
 valign = 1
 
 [node name="GameOver" type="Control" parent="HUD"]
+pause_mode = 2
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1594,6 +1728,7 @@ align = 1
 valign = 1
 
 [node name="RetryButton" type="Button" parent="HUD/GameOver"]
+pause_mode = 2
 margin_left = 100.0
 margin_top = 450.0
 margin_right = 1180.0
@@ -1672,6 +1807,12 @@ text = "Retry"
 [connection signal="body_exited" from="World/Scenario Tree16/Tree_T1/Area2D" to="World/Scenario Tree16" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="World/Scenario Tree17/Tree_T1/Area2D" to="World/Scenario Tree17" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="World/Scenario Tree17/Tree_T1/Area2D" to="World/Scenario Tree17" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree33/Tree_T1/Area2D" to="World/Scenario Tree33" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree33/Tree_T1/Area2D" to="World/Scenario Tree33" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree34/Tree_T1/Area2D" to="World/Scenario Tree34" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree34/Tree_T1/Area2D" to="World/Scenario Tree34" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree35/Tree_T1/Area2D" to="World/Scenario Tree35" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree35/Tree_T1/Area2D" to="World/Scenario Tree35" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="World/Scenario Tree18/Tree_T1/Area2D" to="World/Scenario Tree18" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="World/Scenario Tree18/Tree_T1/Area2D" to="World/Scenario Tree18" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="World/Scenario Tree19/Tree_T1/Area2D" to="World/Scenario Tree19" method="_on_Area2D_body_entered"]
@@ -1680,6 +1821,8 @@ text = "Retry"
 [connection signal="body_exited" from="World/Scenario Tree27/Tree_T1/Area2D" to="World/Scenario Tree27" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="World/Scenario Tree28/Tree_T1/Area2D" to="World/Scenario Tree28" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="World/Scenario Tree28/Tree_T1/Area2D" to="World/Scenario Tree28" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Tree36/Tree_T1/Area2D" to="World/Scenario Tree36" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Tree36/Tree_T1/Area2D" to="World/Scenario Tree36" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="World/Scenario Tree25/Tree_T1/Area2D" to="World/Scenario Tree25" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="World/Scenario Tree25/Tree_T1/Area2D" to="World/Scenario Tree25" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="World/Scenario Tree29/Tree_T1/Area2D" to="World/Scenario Tree29" method="_on_Area2D_body_entered"]
@@ -1712,6 +1855,8 @@ text = "Retry"
 [connection signal="body_exited" from="World/Scenario Wall24/Tree_T1/Area2D" to="World/Scenario Wall24" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="World/Scenario Wall27/Tree_T1/Area2D" to="World/Scenario Wall27" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="World/Scenario Wall27/Tree_T1/Area2D" to="World/Scenario Wall27" method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="World/Scenario Wall29/Tree_T1/Area2D" to="World/Scenario Wall29" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="World/Scenario Wall29/Tree_T1/Area2D" to="World/Scenario Wall29" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="World/Scenario Wall28/Tree_T1/Area2D" to="World/Scenario Wall28" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="World/Scenario Wall28/Tree_T1/Area2D" to="World/Scenario Wall28" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="World/Scenario Wall14/Tree_T1/Area2D" to="World/Scenario Wall14" method="_on_Area2D_body_entered"]

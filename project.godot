@@ -35,12 +35,13 @@ _global_script_class_icons={
 config/name="Intrinity"
 run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
+<<<<<<<HEADrun/main_scene="res://scenes/menu.tscn"
 
 [autoload]
 
 Game="*res://scripts/game.gd"
 Classes="*res://scripts/classes.gd"
-Music="*res://scenes/music.tscn"
+Music="*res://scenes/Music.tscn"
 
 [debug]
 

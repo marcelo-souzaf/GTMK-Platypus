@@ -11,6 +11,6 @@ func _on_button_hovered():
 	Music.hover()
 
 func _unhandled_input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT and event.pressed:
-			Music.click()
+	if (event is InputEventMouseButton and event.pressed and
+	event.button_index == BUTTON_LEFT):
+		Music.click()

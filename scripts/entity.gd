@@ -1,11 +1,11 @@
 extends KinematicBody2D
 class_name Entity
 
-onready var sprite = $AnimatedSprite
 onready var cooldown = $CooldownTimer
 export var class_: int
 var health_bar = null
 
+var sprite: AnimatedSprite
 var health: int = 100
 var max_health: int = 100
 var max_speed: int
@@ -14,10 +14,6 @@ var sight_radius: int
 var is_player := false
 
 var lin_speed := Vector2.ZERO
-
-func _ready():
-	update_appearance()
-	create_health_bar()
 
 func attack(direction: Vector2):
 	cooldown.start(Classes.attack_cooldown[class_])
@@ -42,7 +38,8 @@ func update_stats():
 	self.sight_radius = Classes.sight_radius[class_]
 	if self.is_player:
 		self.max_speed += Game.player_boost_speed
-
+		if class_ == Classes.Swordsman:
+			self.max_speed += Game.swordsman_speed
 func update_appearance():
 	self.sprite.frames = Classes.animations[class_]
 

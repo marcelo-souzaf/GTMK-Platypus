@@ -17,7 +17,7 @@ func _ready():
 		set_collision_mask_bit(2, false)
 
 func _physics_process(delta):
-	var collision = move_and_collide(arrow_dir * ARROW_SPEED * delta)
+	var collision = move_and_collide(arrow_dir * (ARROW_SPEED + Game.arrow_speed_boost) * delta)
 
 	if collision:
 		var body = collision.collider

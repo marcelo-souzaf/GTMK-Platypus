@@ -6,10 +6,13 @@ var spawner = null
 var player = null
 
 func init(spawner_, enemy_class: int, pos: Vector2 = Vector2.ZERO):
-	self.spawner = spawner_
+	self.sprite = $AnimatedSprite
 	self.class_ = enemy_class
+	self.spawner = spawner_
 	self.position = pos
 	update_stats()
+	update_appearance()
+	create_health_bar()
 	if tutorial:
 		self.sight_radius /= 1000
 

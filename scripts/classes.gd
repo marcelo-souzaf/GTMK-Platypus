@@ -30,15 +30,13 @@ const weakness = [Archer, Mage, Swordsman, All]
 const attacks = [
 	preload("res://scenes/attacks/SwordsmanAttack.tscn"),
 	preload("res://scenes/attacks/ArcherAttack.tscn"),
-	preload("res://scenes/attacks/MageAttack.tscn"),
-	preload("res://scenes/attacks/ZombieAttack.tscn")
+	preload("res://scenes/attacks/MageAttack.tscn")
 ]
 
 const animations = [
 	preload("res://resources/animations/Swordsman.tres"),
 	preload("res://resources/animations/Archer.tres"),
-	preload("res://resources/animations/Mage.tres"),
-	preload("res://resources/animations/Zombie.tres")
+	preload("res://resources/animations/Mage.tres")
 ]
 
 const icons = [
@@ -50,29 +48,29 @@ const icons = [
 const bars_front = [
 	preload("res://assets/life_bars/S_HP_Front.png"),
 	preload("res://assets/life_bars/A_HP_Front.png"),
-	preload("res://assets/life_bars/M_HP_Front.png"),
+	preload("res://assets/life_bars/M_HP_Front.png")
 ]
 
 const bars_mid = [
 	preload("res://assets/life_bars/S_HP_Mid.png"),
 	preload("res://assets/life_bars/A_HP_Mid.png"),
-	preload("res://assets/life_bars/M_HP_Mid.png"),
+	preload("res://assets/life_bars/M_HP_Mid.png")
 ]
 
 const bars_back = [
 	preload("res://assets/life_bars/S_HP_Back.png"),
 	preload("res://assets/life_bars/A_HP_Back.png"),
-	preload("res://assets/life_bars/M_HP_Back.png"),
+	preload("res://assets/life_bars/M_HP_Back.png")
 ]
 
 const colors = [
 	Color(0.87, 0.36, 0.21),
-	Color(0.58, 0.69, 0.4),
+	Color(0.92, 0.67, 0.31),
 	Color(0.46, 0.29, 0.51)
 ]
 
 const acceleration = [800, 800, 800, 100]
-const damage = [50, 20, 40, 10]
+const damage = [20, 20, 20, 10]
 const max_speed = [300, 250, 200, 250]
 const health = [100, 100, 100, 100]
 const attack_cooldown = [0.6, 2, 1, 0.5]

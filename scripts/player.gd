@@ -5,8 +5,11 @@ onready var circle = $Circle
 
 func _ready():
 	Game.init(self, get_parent().get_parent())
+	self.sprite = $AnimatedSprite
 	self.is_player = true
 	update_stats()
+	update_appearance()
+	create_health_bar()
 	Music.start()
 	Music.play_music_for_class(self.class_)
 
@@ -56,9 +59,9 @@ func update_stats():
 	.update_stats()
 	Game.ui.update_stats(self.class_)
 
-func update_apperance():
-	.update_apperance()
-	$Circle.modulate = Classes.colors[class_]
+func update_appearance():
+	.update_appearance()
+	circle.modulate = Classes.colors[class_]
 
 func take_damage(amount: int, attacker_class: int):
 	if not $Invulnerability.is_stopped():

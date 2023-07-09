@@ -14,5 +14,11 @@ func call_wave():
 		spawn.call_wave(Game.wave)
 
 func retry():
-	print("Click")
+	Game.mode = Game.Mode.Playing
+	Game.kills_to_level_up = 5
+	Game.total_kill_count = 0
+	Game.player_level = 1
+	Game.enemy_count = 0
+	Game.score = 0
 	get_tree().reload_current_scene()
+	get_tree().paused = false
