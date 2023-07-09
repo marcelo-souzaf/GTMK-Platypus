@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Spawner.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/bg_tile_r.png" type="Texture" id=4]
+[ext_resource path="res://assets/bg_tile.png" type="Texture" id=4]
 [ext_resource path="res://scripts/scenario.gd" type="Script" id=5]
 [ext_resource path="res://resources/main_theme.tres" type="Theme" id=6]
 [ext_resource path="res://scripts/message.gd" type="Script" id=7]
@@ -131,7 +131,9 @@ radius = 500
 min_player_distance = 1200
 class_names = PoolStringArray( "Archer" )
 
-[node name="World" type="Node" parent="."]
+[node name="Attacks" type="Node" parent="."]
+
+[node name="World" type="YSort" parent="."]
 
 [node name="Scenario Tree" type="StaticBody2D" parent="World"]
 position = Vector2( -4264, -2424 )
@@ -812,8 +814,6 @@ position = Vector2( 207, 12 )
 scale = Vector2( 1.0015, 0.451954 )
 polygon = PoolVector2Array( -271.593, 28.7639, -98.8518, -30.9766, -144.783, -134.969, -329.506, -68.5908 )
 
-[node name="Attacks" type="Node" parent="."]
-
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
@@ -825,17 +825,23 @@ class_ = 1
 
 [node name="Enemy" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( -1797, -2134 )
+class_ = null
+tutorial = null
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( -280, -1858 )
 class_ = 1
+tutorial = null
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( -894, -1587 )
 class_ = 2
+tutorial = null
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 293, -1494 )
+class_ = null
+tutorial = null
 
 [node name="AreaMessagers" type="Node" parent="."]
 
@@ -845,7 +851,7 @@ script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true
 }
-message = "Right click to attack."
+message = "Left click to attack."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaMessagers/Area2D"]
 shape = SubResource( 7 )
@@ -868,7 +874,6 @@ __meta__ = {
 "_edit_group_": true
 }
 message = "Defeat all enemies to proceed. Good luck!"
-start_waves = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaMessagers/Area2D3"]
 position = Vector2( 1472, 239 )

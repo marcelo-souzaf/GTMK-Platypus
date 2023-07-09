@@ -50,6 +50,7 @@ Music="*res://scenes/Music.tscn"
 
 [debug]
 
+gdscript/warnings/narrowing_conversion=false
 gdscript/warnings/return_value_discarded=false
 gdscript/warnings/integer_division=false
 

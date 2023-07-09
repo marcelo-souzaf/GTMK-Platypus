@@ -48,7 +48,9 @@ func _ready():
 	self.pause_mode = Node.PAUSE_MODE_PROCESS
 
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_cancel") and mode == Mode.Playing:
+	if event is InputEventKey and event.scancode == KEY_F11:
+		OS.window_fullscreen = not OS.window_fullscreen
+	elif event.is_action_pressed("ui_cancel") and mode == Mode.Playing:
 		get_tree().paused = not get_tree().paused
 
 func _physics_process(_delta):
@@ -60,8 +62,7 @@ func _physics_process(_delta):
 			if mode == Mode.GameOver:
 				game.get_node("HUD/GameOver").show()
 		return
-	if frames_left % DECREASE_INTERVAL == 0:
-		Engine.time_scale *= DECREASE_FRACTION
+	Engine.time_scale *= 0.9
 	frames_left -= 1
 
 func spawn_particles(position: Vector2, type = 'teleport_particles'):
@@ -75,7 +76,6 @@ func spawn_particles(position: Vector2, type = 'teleport_particles'):
 	game.add_child(particles)
 
 func transform_player_into(enemy):
-	enemy.dead = true
 	spawn_particles(enemy.position, 'death_particles')
 	Music.play_music_for_class(enemy.class_)
 	frames_left = TRANSITION_DURATION
@@ -110,10 +110,11 @@ func transform_player_into(enemy):
 	enemy.queue_free()
 
 func game_over():
-	print("Game over")
-	frames_left = TRANSITION_DURATION * 3
-	mode = Mode.GameOver
-	set_physics_process(true)
+	# Check to prevent endless resets of the game over transition
+	if mode != Mode.GameOver:
+		mode = Mode.GameOver
+		set_physics_process(true)
+		frames_left = 1.5 * TRANSITION_DURATION
 
 func show_upgrades():
 	upgrade_sys.show()

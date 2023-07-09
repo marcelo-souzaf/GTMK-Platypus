@@ -832,7 +832,7 @@ script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true
 }
-message = "Right click to attack."
+message = "Left click to attack."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaMessagers/Area2D"]
 shape = SubResource( 7 )

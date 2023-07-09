@@ -8,7 +8,7 @@ func _ready():
 
 func _physics_process(delta):
 	# Attack
-	if Input.is_action_just_pressed("attack") and cooldown.is_stopped():
+	if Input.is_action_just_pressed("attack") and not on_cooldown:
 		var direction = get_global_mouse_position() - position
 		self.attack(direction)
 
