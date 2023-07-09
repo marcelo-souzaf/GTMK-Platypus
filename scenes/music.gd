@@ -13,4 +13,3 @@ func play_music_for_class(class_ : int):
 			$MusicM.volume_db = -5
 		Classes.Swordsman:
 			$MusicS.volume_db = -5
-

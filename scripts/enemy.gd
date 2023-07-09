@@ -2,9 +2,8 @@ extends "./entity.gd"
 class_name Enemy
 
 export var tutorial = true
-var player = null
 var spawner = null
-var dead = false
+var player = null
 
 func init(spawner_, enemy_class: int, pos: Vector2 = Vector2.ZERO):
 	self.spawner = spawner_
@@ -12,7 +11,7 @@ func init(spawner_, enemy_class: int, pos: Vector2 = Vector2.ZERO):
 	self.position = pos
 	update_stats()
 	if tutorial:
-		self.sight_radius = self.sight_radius / 1000
+		self.sight_radius /= 1000
 
 func _ready():
 	player = Game.player
@@ -22,7 +21,7 @@ func _physics_process(delta):
 
 	# if player is on attack radius
 	if player_dist < Classes.attack_radius[class_]:
-		if cooldown.is_stopped() and not dead:
+		if cooldown.is_stopped():
 			var direction = player.position - position
 			attack(direction)
 		else:

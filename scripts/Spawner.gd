@@ -19,7 +19,7 @@ func _ready():
 	timer.wait_time = rand_range(3.0, 7.5)
 	timer.start()
 
-func call_wave(num_of_spawns : int = 1):
+func call_wave(num_of_spawns: int = 1):
 	for _i in range(num_of_spawns):
 		if current_enemies_alive >= max_enemies_alive:
 			return
@@ -35,4 +35,3 @@ func call_wave(num_of_spawns : int = 1):
 		enemies_container.add_child(enemy_instance)
 		current_enemies_alive += 1
 		Game.enemy_count += 1
-

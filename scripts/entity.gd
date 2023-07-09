@@ -12,6 +12,7 @@ var max_speed: int
 var acceleration: int
 var sight_radius: int
 var is_player := false
+var on_cooldown := false
 
 var lin_speed := Vector2.ZERO
 
@@ -20,6 +21,7 @@ func _ready():
 	create_health_bar()
 
 func attack(direction: Vector2):
+	on_cooldown = true
 	cooldown.start(Classes.attack_cooldown[class_])
 	var attack = Classes.attacks[class_].instance()
 	attack.position = self.position
@@ -27,6 +29,7 @@ func attack(direction: Vector2):
 	Game.attacks_container.add_child(attack)
 
 func take_damage(amount: int, attacker_class: int):
+	print("Hit")
 	var weakness: int = Classes.weakness[class_]
 	# Doubles the damage if the entity is weak against the attacker's class
 	health -= amount * (1 + int(weakness == attacker_class or weakness == Classes.All))

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bg_tile_r.png-851c56b9e00b65289b8fb83e680cd052.stex"
+path="res://.import/fence_5.png-02ffa1fa9cdfa2ec5edab54ca8f35c0f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bg_tile_r.png"
-dest_files=[ "res://.import/bg_tile_r.png-851c56b9e00b65289b8fb83e680cd052.stex" ]
+source_file="res://assets/map_sprites/fence_5.png"
+dest_files=[ "res://.import/fence_5.png-02ffa1fa9cdfa2ec5edab54ca8f35c0f.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
