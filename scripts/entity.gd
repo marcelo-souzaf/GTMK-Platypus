@@ -41,7 +41,7 @@ func update_stats():
 	self.acceleration = Classes.acceleration[class_]
 	self.sight_radius = Classes.sight_radius[class_]
 	if self.is_player:
-		self.max_speed += 150
+		self.max_speed += Game.player_boost_speed
 
 func update_appearance():
 	self.sprite.frames = Classes.animations[class_]

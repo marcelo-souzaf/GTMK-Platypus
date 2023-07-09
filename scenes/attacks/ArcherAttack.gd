@@ -23,7 +23,7 @@ func _physics_process(delta):
 		var body = collision.collider
 		if by_player and body != Game.player:
 			if body.has_method("take_damage"):
-				body.take_damage(Classes.damage[Classes.Archer] * 3, Classes.Archer)
+				body.take_damage(Classes.damage[Classes.Archer] * Game.player_damage, Classes.Archer)
 		elif not by_player and body == Game.player:
 			if body.has_method("take_damage"):
 				body.take_damage(Classes.damage[Classes.Archer], Classes.Archer)

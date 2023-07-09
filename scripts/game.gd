@@ -36,6 +36,9 @@ var main
 var upgrades = []
 var wave = 1
 
+var player_damage = 3
+var player_boost_speed = 150
+
 func init(player_node: Player, game_node: Node2D):
 	game = game_node
 	player = player_node
@@ -87,6 +90,7 @@ func transform_player_into(enemy):
 	
 		if enemy_count <= 0:
 			message_sys.show_message("Wave " + str(wave) + " cleared!", 3)
+			start_count_down()
 
 	total_kill_count += 1
 	if score >= kills_to_level_up:
@@ -129,7 +133,14 @@ func upgrade_selected(upgrade : int):
 	upgrade_sys.hide()
 	get_tree().paused = false
 
-	start_count_down()
+	
+	match upgrade:
+		0:
+			player.health = player.max_health
+		1:
+			player_damage += 0.2
+		2:
+			player_boost_speed += 20
 
 func call_wave():
 	enemy_count = 0

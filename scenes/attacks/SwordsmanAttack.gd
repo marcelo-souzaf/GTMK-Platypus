@@ -17,7 +17,7 @@ func _ready():
 func _on_AttackArea_body_entered(body):
 	if body is Entity:
 		if by_player:
-			body.take_damage(Classes.damage[class_] * 3, class_)
+			body.take_damage(Classes.damage[class_] * Game.player_damage, class_)
 		else:
 			body.take_damage(Classes.damage[class_], class_)
 
