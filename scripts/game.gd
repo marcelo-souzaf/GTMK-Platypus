@@ -103,6 +103,8 @@ func transform_player_into(enemy):
 	player.update_appearance()
 	player.position = enemy.position
 	player.lin_speed = enemy.lin_speed
+	
+	player.cooldown.stop()
 	player.health_bar.init(player)
 	ui.health_bar.init(player)
 	spawn_particles(player.position)
