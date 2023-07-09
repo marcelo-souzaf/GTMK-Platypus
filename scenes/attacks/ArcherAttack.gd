@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const ARROW_SPEED = 1500
+const ARROW_SPEED = 900
 
 var arrow_dir := Vector2.ZERO
 var by_player: bool

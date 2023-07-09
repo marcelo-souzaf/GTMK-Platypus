@@ -1,5 +1,8 @@
 extends Node
 
+signal upgraded
+signal next_wave
+
 enum Mode {
 	Playing,
 	Paused,
@@ -29,12 +32,15 @@ var ui: CanvasLayer
 var attacks_container
 var message_sys
 var upgrade_sys
+var main
+
+var wave = 1
 
 func init(player_node: Player, game_node: Node2D):
 	game = game_node
 	player = player_node
 	ui = game.get_node("HUD")
-	ui.init(health_bar_scene.instance())
+	# ui.init(health_bar_scene.instance())
 
 func _ready():
 	set_physics_process(false)
@@ -69,6 +75,13 @@ func transform_player_into(enemy):
 
 	score += 1
 	enemy_count -= 1
+	if enemy.spawner != null:
+		message_sys.show_message(str(enemy_count) + " enemies left", 2)
+	
+		if enemy_count <= 0:
+			message_sys.show_message("Wave " + str(wave) + " cleared!", 3)
+			show_upgrades()
+
 	total_kill_count += 1
 	if score >= kills_to_level_up:
 		score = 0
@@ -76,7 +89,7 @@ func transform_player_into(enemy):
 		mode = Mode.LevelingUp
 		game.get_node("HUD/LevelUp").show()
 	
-	set_physics_process(true)
+	
 	player.class_ = enemy.class_
 	player.update_appearance()
 	player.update_stats()
@@ -90,6 +103,7 @@ func transform_player_into(enemy):
 	enemy.queue_free()
 
 func game_over():
+	print("Game over")
 	frames_left = TRANSITION_DURATION * 3
 	mode = Mode.GameOver
 	set_physics_process(true)
@@ -99,8 +113,20 @@ func show_upgrades():
 	get_tree().paused = true
 
 func upgrade_selected(upgrade : int):
-	print(upgrade)
-	
+	print("Upgrade selected: " + str(upgrade))
 	upgrade_sys.hide()
 	get_tree().paused = false
-	pass
+
+	start_count_down()
+
+func call_wave():
+	main.call_wave()
+
+func start_count_down():
+	var wait_time = 5 if wave < 5 else 10
+	for i in range(wait_time):
+		message_sys.show_message("Next wave in " + str(5 - i), 1)
+		yield(get_tree().create_timer(1.0), "timeout")
+	
+	wave += 1
+	main.call_wave()

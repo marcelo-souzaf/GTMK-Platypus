@@ -10,6 +10,7 @@ var health: int = 100
 var max_health: int = 100
 var max_speed: int
 var acceleration: int
+var sight_radius: int
 var is_player := false
 
 var lin_speed := Vector2.ZERO
@@ -38,6 +39,7 @@ func update_stats():
 	self.max_health = Classes.health[class_]
 	self.max_speed = Classes.max_speed[class_]
 	self.acceleration = Classes.acceleration[class_]
+	self.sight_radius = Classes.sight_radius[class_]
 	if self.is_player:
 		self.max_speed += 150
 

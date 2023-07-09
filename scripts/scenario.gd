@@ -13,7 +13,7 @@ func _on_Area2D_body_exited(body: Node):
 		update_transparency()
 
 func update_transparency():
-	if num_bodies > 1:
+	if num_bodies >= 1:
 		self.modulate = Color(1, 1, 1, 0.5)
 	else:
 		self.modulate = Color(1, 1, 1, 1)

@@ -1,15 +1,18 @@
 extends "./entity.gd"
 class_name Enemy
 
+export var tutorial = true
 var player = null
 var spawner = null
 var dead = false
 
-func init(spawner_: Spawner, enemy_class: int, pos: Vector2 = Vector2.ZERO):
+func init(spawner_, enemy_class: int, pos: Vector2 = Vector2.ZERO):
 	self.spawner = spawner_
 	self.class_ = enemy_class
 	self.position = pos
 	update_stats()
+	if tutorial:
+		self.sight_radius = self.sight_radius / 1000
 
 func _ready():
 	player = Game.player
@@ -25,7 +28,7 @@ func _physics_process(delta):
 		else:
 			idle(delta)
 	# if player is on sight radius
-	elif player_dist < Classes.sight_radius[class_]:
+	elif player_dist < self.sight_radius:
 		chase(delta)
 	# if player is out of sight radius
 	else:

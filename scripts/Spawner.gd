@@ -9,7 +9,6 @@ export var min_player_distance := 1000
 export var class_names : PoolStringArray = ["Swordsman"]
 var classes : Array = []
 
-export var num_of_spawns := 1
 export var max_enemies_alive := 5
 var current_enemies_alive := 0
 
@@ -20,16 +19,13 @@ func _ready():
 	timer.wait_time = rand_range(3.0, 7.5)
 	timer.start()
 
-func _on_CooldownTimer_timeout():
-	# if it's close enough to the player
-	if Game.player.position.distance_to(position) > min_player_distance:
-		return
-
+func call_wave(num_of_spawns : int = 1):
 	for _i in range(num_of_spawns):
 		if current_enemies_alive >= max_enemies_alive:
 			return
 
 		var enemy_instance = Game.enemy.instance()
+		enemy_instance.tutorial = false
 		enemy_instance.init(
 			self,
 			classes[randi() % classes.size()],
@@ -39,3 +35,4 @@ func _on_CooldownTimer_timeout():
 		enemies_container.add_child(enemy_instance)
 		current_enemies_alive += 1
 		Game.enemy_count += 1
+

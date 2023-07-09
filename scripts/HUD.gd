@@ -35,6 +35,7 @@ func update_skulls():
 		kills.add_child(new_slot)
 
 func update_stats(class_: int):
+	return
 	icon.texture = Classes.icons[class_]
 	var strong_against = Classes.weakness.find(class_)
 	strength_icon = Classes.icons[strong_against]

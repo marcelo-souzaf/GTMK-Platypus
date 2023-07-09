@@ -4,7 +4,6 @@ onready var timer = $Timer
 onready var anim = $AnimationPlayer
 
 func show_message(text, duration = 5):
-	Game.show_upgrades()
 	timer.set_wait_time(duration)
 	self.text = text
 	anim.play("show_up")
