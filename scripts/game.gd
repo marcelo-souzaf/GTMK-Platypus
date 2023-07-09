@@ -35,6 +35,8 @@ var message_sys
 var upgrade_sys
 var main
 
+
+var upgrades = []
 var wave = 1
 
 func init(player_node: Player, game_node: Node2D):

@@ -12,3 +12,8 @@ func call_wave():
 
 	for spawn in $Spawners.get_children():
 		spawn.call_wave(Game.wave)
+
+
+func retry():
+	print("retried")
+	get_tree().reload_current_scene()

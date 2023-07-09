@@ -11,8 +11,12 @@ func _ready():
 
 
 func _on_PlayButton_pressed():
-	get_tree().change_scene("res://Game.tscn")
+	queue_free()
 
 
 func _on_AboutButton_pressed():
 	pass # Replace with function body.
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	Music.start()

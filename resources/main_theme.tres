@@ -1,18 +1,42 @@
-[gd_resource type="Theme" load_steps=4 format=2]
+[gd_resource type="Theme" load_steps=7 format=2]
 
-[sub_resource type="DynamicFontData" id=2]
-font_path = "res://assets/fonts/Chilet.otf"
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://assets/ARCO for OSX.otf"
 
 [sub_resource type="DynamicFont" id=3]
-size = 28
-font_data = SubResource( 2 )
+size = 27
+font_data = SubResource( 4 )
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxFlat" id=6]
+content_margin_left = 10.0
+content_margin_right = 10.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color( 0.27451, 0.627451, 0.403922, 1 )
+corner_radius_top_left = 255
+corner_radius_top_right = 255
+corner_radius_bottom_right = 255
+corner_radius_bottom_left = 255
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_top = 10.0
 content_margin_bottom = 10.0
-bg_color = Color( 0.0313726, 0.0313726, 0.0313726, 1 )
+bg_color = Color( 0.384314, 0.596078, 0.490196, 1 )
+corner_radius_top_left = 255
+corner_radius_top_right = 255
+corner_radius_bottom_right = 255
+corner_radius_bottom_left = 255
+
+[sub_resource type="StyleBoxFlat" id=7]
+content_margin_left = 10.0
+content_margin_right = 10.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color( 0.12549, 0.298039, 0.215686, 1 )
 corner_radius_top_left = 255
 corner_radius_top_right = 255
 corner_radius_bottom_right = 255
@@ -20,6 +44,9 @@ corner_radius_bottom_left = 255
 
 [resource]
 Button/fonts/font = SubResource( 3 )
+Button/styles/focus = SubResource( 5 )
+Button/styles/hover = SubResource( 6 )
 Button/styles/normal = SubResource( 1 )
+Button/styles/pressed = SubResource( 7 )
 Fonts/fonts/normal = SubResource( 3 )
 Label/fonts/font = SubResource( 3 )

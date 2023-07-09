@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
@@ -25,6 +25,9 @@ extents = Vector2( 311.533, 79.6541 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 104, 354 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 104, 896.624 )
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -1770,7 +1773,7 @@ script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true
 }
-message = "Left click to attack."
+message = "Left click to attack. "
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaMessagers/Area2D"]
 shape = SubResource( 7 )
@@ -1785,6 +1788,20 @@ message = "Different classes have different weaknesses."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaMessagers/Area2D2"]
 shape = SubResource( 7 )
+
+[node name="Area2D3" type="Area2D" parent="AreaMessagers"]
+position = Vector2( 601, -1086 )
+rotation = 0.858702
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true
+}
+message = "asasda"
+time = 2
+start_waves = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaMessagers/Area2D3"]
+shape = SubResource( 11 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -2018,4 +2035,5 @@ align = 1
 [connection signal="body_exited" from="World/Scenario Wall28/Tree_T1/Area2D" to="World/Scenario Wall28" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="AreaMessagers/Area2D" to="AreaMessagers/Area2D" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="AreaMessagers/Area2D2" to="AreaMessagers/Area2D2" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="AreaMessagers/Area2D3" to="AreaMessagers/Area2D3" method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="HUD/Control/MessageSys/Timer" to="HUD/Control/MessageSys" method="_on_Timer_timeout"]

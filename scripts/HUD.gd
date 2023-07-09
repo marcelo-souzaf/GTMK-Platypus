@@ -40,3 +40,4 @@ func update_stats(class_: int):
 	$Stats/Level.text = "Level  %d" % Game.player_level
 	if Game.score > 0:
 		kills.get_child(Game.score - 1).texture = full
+

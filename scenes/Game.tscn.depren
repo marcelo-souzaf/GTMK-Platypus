@@ -7,19 +7,19 @@
 [ext_resource path="res://scripts/scenario.gd" type="Script" id=5]
 [ext_resource path="res://resources/main_theme.tres" type="Theme" id=6]
 [ext_resource path="res://scripts/message.gd" type="Script" id=7]
-[ext_resource path="res://scripts/area_messager.gd" type="Script" id=8]
+[ext_resource path="res://scripts/Main_game.gd" type="Script" id=8]
 [ext_resource path="res://assets/map_sprites/wall_hor.png" type="Texture" id=9]
 [ext_resource path="res://assets/map_sprites/wall_ver.png" type="Texture" id=10]
 [ext_resource path="res://assets/map_sprites/tree_1.png" type="Texture" id=11]
 [ext_resource path="res://assets/map_sprites/pine_3.png" type="Texture" id=12]
-[ext_resource path="res://scripts/HUD.gd" type="Script" id=13]
+[ext_resource path="res://scripts/area_messager.gd" type="Script" id=13]
 [ext_resource path="res://assets/map_sprites/ruin_5.png" type="Texture" id=14]
 [ext_resource path="res://scenes/UpgradePanel.tscn" type="PackedScene" id=15]
 [ext_resource path="res://resources/ingame_ui_font.tres" type="DynamicFont" id=16]
 [ext_resource path="res://assets/ui/Icon_Kill_Empty_32.png" type="Texture" id=17]
 [ext_resource path="res://assets/ui/Swordsman.png" type="Texture" id=18]
 [ext_resource path="res://assets/ui/Archer.png" type="Texture" id=19]
-[ext_resource path="res://scripts/Main_game.gd" type="Script" id=20]
+[ext_resource path="res://scripts/HUD.gd" type="Script" id=20]
 [ext_resource path="res://scenes/menu.tscn" type="PackedScene" id=21]
 
 [sub_resource type="RectangleShape2D" id=6]
@@ -93,7 +93,7 @@ shader = SubResource( 8 )
 shader_param/lod = 2.0
 
 [node name="Game" type="Node2D"]
-script = ExtResource( 20 )
+script = ExtResource( 8 )
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_left = 0.5
@@ -842,7 +842,7 @@ polygon = PoolVector2Array( -271.593, 28.7639, -98.8518, -30.9766, -144.783, -13
 
 [node name="Area2D" type="Area2D" parent="AreaMessagers"]
 position = Vector2( -3054, -2122 )
-script = ExtResource( 8 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -853,7 +853,7 @@ shape = SubResource( 7 )
 
 [node name="Area2D2" type="Area2D" parent="AreaMessagers"]
 position = Vector2( -1551, -2046 )
-script = ExtResource( 8 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -864,7 +864,7 @@ shape = SubResource( 7 )
 
 [node name="Area2D3" type="Area2D" parent="AreaMessagers"]
 position = Vector2( 20, -1148 )
-script = ExtResource( 8 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -877,7 +877,7 @@ rotation = -0.10821
 shape = SubResource( 10 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
-script = ExtResource( 13 )
+script = ExtResource( 20 )
 
 [node name="Stats" type="Node2D" parent="HUD"]
 position = Vector2( 10, 10 )

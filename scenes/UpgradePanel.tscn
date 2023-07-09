@@ -26,15 +26,15 @@ margin_bottom = -24.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 margin_right = 270.0
-margin_bottom = 75.0
+margin_bottom = 61.0
 mouse_filter = 1
 text = "Archer: You can Now Breathe"
 autowrap = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
-margin_top = 79.0
+margin_top = 65.0
 margin_right = 270.0
-margin_bottom = 109.0
+margin_bottom = 95.0
 mouse_filter = 1
 text = "Lorem ipsum asdlasjd asldjk alskdjklas asldkjas"
 fit_content_height = true

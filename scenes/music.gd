@@ -1,7 +1,14 @@
 extends Node2D
 
+func start():
+	$MusicA.play()
+	$MusicM.play()
+	$MusicS.play()
+	$MusicBase.play()
+	
+	$MusicBase.volume_db = -10
+
 func play_music_for_class(class_ : int):
-	$MusicBase.volume_db = -5
 	$MusicA.volume_db = -80
 	$MusicM.volume_db = -80
 	$MusicS.volume_db = -80
