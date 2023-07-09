@@ -1,10 +1,40 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/attacks/MageAttack.gd" type="Script" id=1]
 [ext_resource path="res://assets/fxs/fireball.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 39.0
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.454545, 0.850267 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.761133, 0.475197, 0.166498, 1, 0.112695, 0.0805595, 0.0805595, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0.467448, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, -98, 0 )
+initial_velocity = 350.0
+initial_velocity_random = 0.24
+angular_velocity = 150.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 300.0
+angle = 168.6
+angle_random = 1.0
+scale = 32.0
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 165.846
@@ -20,13 +50,23 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
+[node name="Particles2D" type="Particles2D" parent="."]
+emitting = false
+amount = 128
+lifetime = 4.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.92
+local_coords = false
+process_material = SubResource( 7 )
+
 [node name="ExplosionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="ExplosionArea"]
 shape = SubResource( 2 )
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 4.0
 one_shot = true
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]

@@ -10,6 +10,7 @@ enum Mode {
 	GameOver
 }
 const teleport_particles = preload("res://scenes/TeleportParticles.tscn")
+const death_particles = preload("res://scenes/DeathParticles.tscn")
 const blinking_shader = preload("res://resources/entity_damaged.tres")
 const health_bar_scene = preload("res://scenes/HealthBar.tscn")
 const enemy = preload("res://Scenes/Enemy.tscn")
@@ -63,13 +64,19 @@ func _physics_process(_delta):
 		Engine.time_scale *= DECREASE_FRACTION
 	frames_left -= 1
 
-func spawn_particles(position: Vector2):
-	var particles = teleport_particles.instance()
+func spawn_particles(position: Vector2, type = 'teleport_particles'):
+	var particles
+	match type:
+		'teleport_particles':
+			particles = teleport_particles.instance()
+		'death_particles':
+			particles = death_particles.instance()
 	particles.position = position
 	game.add_child(particles)
 
 func transform_player_into(enemy):
 	enemy.dead = true
+	spawn_particles(enemy.position, 'death_particles')
 	Music.play_music_for_class(enemy.class_)
 	frames_left = TRANSITION_DURATION
 
@@ -120,6 +127,7 @@ func upgrade_selected(upgrade : int):
 	start_count_down()
 
 func call_wave():
+	enemy_count = 0
 	main.call_wave()
 
 func start_count_down():
