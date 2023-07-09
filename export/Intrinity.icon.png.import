@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Intrinity.icon.png-5a186d7cb56a89c4f06b381495a6d9b8.stex"
+path="res://.import/Intrinity.icon.png-c47d64b09ad2c85927cba79f5ce904ce.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://exported/Intrinity.icon.png"
-dest_files=[ "res://.import/Intrinity.icon.png-5a186d7cb56a89c4f06b381495a6d9b8.stex" ]
+source_file="res://export/Intrinity.icon.png"
+dest_files=[ "res://.import/Intrinity.icon.png-c47d64b09ad2c85927cba79f5ce904ce.stex" ]
 
 [params]
 

@@ -1,5 +1,4 @@
 extends Position2D
-class_name Spawner
 
 onready var timer = $CooldownTimer
 onready var enemies_container = get_node("../../Enemies")
