@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/musics/GMTK_2024_test.mp3" type="AudioStream" id=1]
-[ext_resource path="res://assets/musics/GMTK_2024_Archer_prewiev.mp3" type="AudioStream" id=2]
-[ext_resource path="res://assets/musics/GMTK_2024_Wizard_prewiev.mp3" type="AudioStream" id=3]
-[ext_resource path="res://assets/musics/GMTK_2024_warrior_prewiev.mp3" type="AudioStream" id=4]
-[ext_resource path="res://scenes/music.gd" type="Script" id=5]
+[ext_resource path="res://assets/music/GMTK_2024_test.mp3" type="AudioStream" id=1]
+[ext_resource path="res://assets/music/GMTK_2024_Archer_prewiev.mp3" type="AudioStream" id=2]
+[ext_resource path="res://assets/music/GMTK_2024_Wizard_prewiev.mp3" type="AudioStream" id=3]
+[ext_resource path="res://assets/music/GMTK_2024_warrior_prewiev.mp3" type="AudioStream" id=4]
+[ext_resource path="res://scripts/music.gd" type="Script" id=5]
+[ext_resource path="res://assets/sfx/upgrade.mp3" type="AudioStream" id=6]
+[ext_resource path="res://assets/sfx/hover.mp3" type="AudioStream" id=7]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node" type="Node"]
 pause_mode = 2
 script = ExtResource( 5 )
 
@@ -24,4 +26,24 @@ volume_db = -80.0
 
 [node name="MusicBase" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
-volume_db = -5.0
+volume_db = -10.0
+
+[node name="Effects" type="Node" parent="."]
+
+[node name="Hover" type="AudioStreamPlayer" parent="Effects"]
+stream = ExtResource( 7 )
+
+[node name="Click" type="AudioStreamPlayer" parent="Effects"]
+
+[node name="Upgrade" type="AudioStreamPlayer" parent="Effects"]
+stream = ExtResource( 6 )
+
+[node name="Attacks" type="Node" parent="."]
+
+[node name="AttackS" type="AudioStreamPlayer" parent="Attacks"]
+
+[node name="AttackA" type="AudioStreamPlayer" parent="Attacks"]
+
+[node name="AttackM" type="AudioStreamPlayer" parent="Attacks"]
+
+[node name="AttackSHit" type="AudioStreamPlayer" parent="Attacks"]

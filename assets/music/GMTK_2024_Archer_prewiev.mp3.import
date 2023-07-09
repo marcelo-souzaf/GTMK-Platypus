@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/GMTK_2024_Archer_prewiev.mp3-4e71427bae8a96b46eda2600548d830e.mp3str"
+
+[deps]
+
+source_file="res://assets/music/GMTK_2024_Archer_prewiev.mp3"
+dest_files=[ "res://.import/GMTK_2024_Archer_prewiev.mp3-4e71427bae8a96b46eda2600548d830e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,22 +1,13 @@
 extends Control
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
 func _on_PlayButton_pressed():
-	queue_free()
-
+	get_tree().change_scene("res://scenes/Game.tscn")
 
 func _on_AboutButton_pressed():
-	pass # Replace with function body.
+	# Open link to GitHub
+	OS.shell_open("https://github.com/marcelo-souzaf/Intrinity")
 
-
-func _on_AnimationPlayer_animation_finished(anim_name):
-	Music.start()
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.pressed:
+			Music.click()

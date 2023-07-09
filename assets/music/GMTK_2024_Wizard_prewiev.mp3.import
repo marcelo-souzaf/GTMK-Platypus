@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/GMTK_2024_Wizard_prewiev.mp3-7ba81cd80b62504beb0ce4234403e956.mp3str"
+
+[deps]
+
+source_file="res://assets/music/GMTK_2024_Wizard_prewiev.mp3"
+dest_files=[ "res://.import/GMTK_2024_Wizard_prewiev.mp3-7ba81cd80b62504beb0ce4234403e956.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

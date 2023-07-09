@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=7 format=2]
 
 [sub_resource type="DynamicFontData" id=4]
-font_path = "res://assets/ARCO for OSX.otf"
+font_path = "res://assets/fonts/ARCO.otf"
 
 [sub_resource type="DynamicFont" id=3]
 size = 27

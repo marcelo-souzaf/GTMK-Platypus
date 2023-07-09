@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/upgrade.mp3-73568dd7a2aa3fbf1c3053791c265515.mp3str"
+
+[deps]
+
+source_file="res://assets/sfx/upgrade.mp3"
+dest_files=[ "res://.import/upgrade.mp3-73568dd7a2aa3fbf1c3053791c265515.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

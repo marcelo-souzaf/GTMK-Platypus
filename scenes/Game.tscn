@@ -1,7 +1,6 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Spawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/bg_tile.png" type="Texture" id=4]
 [ext_resource path="res://scripts/scenario.gd" type="Script" id=5]
@@ -19,8 +18,7 @@
 [ext_resource path="res://assets/ui/Icon_Kill_Empty_32.png" type="Texture" id=17]
 [ext_resource path="res://assets/ui/Swordsman.png" type="Texture" id=18]
 [ext_resource path="res://assets/ui/Archer.png" type="Texture" id=19]
-[ext_resource path="res://scripts/Main_game.gd" type="Script" id=20]
-[ext_resource path="res://scenes/menu.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scripts/main_game.gd" type="Script" id=20]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 51, 24 )
@@ -92,6 +90,10 @@ void fragment(){
 shader = SubResource( 8 )
 shader_param/lod = 2.0
 
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 8 )
+shader_param/lod = 0.6
+
 [node name="Game" type="Node2D"]
 script = ExtResource( 20 )
 
@@ -142,20 +144,6 @@ z_index = 1
 class_ = 1
 
 [node name="Enemies" type="YSort" parent="."]
-
-[node name="Enemy" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( -1797, -2134 )
-
-[node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( -280, -1858 )
-class_ = 1
-
-[node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( -894, -1587 )
-class_ = 2
-
-[node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( 293, -1494 )
 
 [node name="World" type="YSort" parent="."]
 
@@ -919,6 +907,7 @@ texture = ExtResource( 17 )
 centered = false
 
 [node name="LevelUp" type="Control" parent="HUD"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 6 )
@@ -1013,16 +1002,39 @@ align = 1
 valign = 1
 
 [node name="RetryButton" type="Button" parent="HUD/GameOver"]
-anchor_top = 1.0
+margin_left = 100.0
+margin_top = 450.0
+margin_right = 1180.0
+margin_bottom = 515.0
+rect_min_size = Vector2( 1080, 0 )
+custom_fonts/font = ExtResource( 16 )
+text = "Retry"
+
+[node name="Pause" type="Control" parent="HUD"]
+visible = false
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="Blur" type="ColorRect" parent="HUD/Pause"]
+material = SubResource( 11 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 544.0
-margin_top = -196.0
-margin_right = 459.0
-margin_bottom = -131.0
-text = "Retry (Don't work actually)"
+mouse_filter = 2
 
-[node name="Menu" parent="HUD" instance=ExtResource( 21 )]
+[node name="Label" type="Label" parent="HUD/Pause"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -102.0
+margin_top = -17.0
+margin_right = 102.0
+margin_bottom = 17.0
+custom_fonts/font = ExtResource( 16 )
+text = "Paused
+"
+align = 1
+valign = 1
 
 [connection signal="body_entered" from="World/Scenario Tree/Tree_T1/Area2D" to="World/Scenario Tree" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="World/Scenario Tree/Tree_T1/Area2D" to="World/Scenario Tree" method="_on_Area2D_body_exited"]

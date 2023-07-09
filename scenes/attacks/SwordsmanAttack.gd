@@ -23,4 +23,3 @@ func _on_AttackArea_body_entered(body):
 
 func _on_AttackTimer_timeout():
 	queue_free()
-

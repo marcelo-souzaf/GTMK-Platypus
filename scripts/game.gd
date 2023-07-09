@@ -1,8 +1,5 @@
 extends Node
 
-signal upgraded
-signal next_wave
-
 enum Mode {
 	Playing,
 	Paused,
@@ -13,7 +10,7 @@ const teleport_particles = preload("res://scenes/TeleportParticles.tscn")
 const death_particles = preload("res://scenes/DeathParticles.tscn")
 const blinking_shader = preload("res://resources/entity_damaged.tres")
 const health_bar_scene = preload("res://scenes/HealthBar.tscn")
-const enemy = preload("res://Scenes/Enemy.tscn")
+const enemy = preload("res://scenes/Enemy.tscn")
 # Measured in physics_process calls. These happen in 60 Hz
 const TRANSITION_DURATION = 20
 const DECREASE_INTERVAL = 10
@@ -50,10 +47,11 @@ func _ready():
 	self.pause_mode = Node.PAUSE_MODE_PROCESS
 
 func _unhandled_input(event):
-	if event is InputEventKey and event.scancode == KEY_F11:
+	if event is InputEventKey and event.scancode == KEY_F11 and not event.is_pressed():
 		OS.window_fullscreen = not OS.window_fullscreen
-	elif event.is_action_pressed("ui_cancel") and mode == Mode.Playing:
+	elif event.is_action_released("ui_cancel") and mode == Mode.Playing:
 		get_tree().paused = not get_tree().paused
+		Game.ui.get_node("Pause").visible = get_tree().paused
 
 func _physics_process(_delta):
 	if frames_left <= 0:
@@ -89,12 +87,15 @@ func transform_player_into(enemy):
 	
 		if enemy_count <= 0:
 			message_sys.show_message("Wave " + str(wave) + " cleared!", 3)
-			show_upgrades()
 
 	total_kill_count += 1
 	if score >= kills_to_level_up:
 		score = 0
 		player_level += 1
+		kills_to_level_up = int(clamp(5, 10, 3 + total_kill_count / 5))
+		show_upgrades()
+		ui.update_skulls()
+
 		mode = Mode.LevelingUp
 		game.get_node("HUD/LevelUp").show()
 	
@@ -103,8 +104,8 @@ func transform_player_into(enemy):
 	player.update_appearance()
 	player.position = enemy.position
 	player.lin_speed = enemy.lin_speed
-	
-	player.cooldown.stop()
+
+	player.cooldown.start(0.1)
 	player.health_bar.init(player)
 	ui.health_bar.init(player)
 	spawn_particles(player.position)

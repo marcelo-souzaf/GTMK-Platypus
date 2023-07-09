@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/gmtk logo.png" type="Texture" id=2]
 [ext_resource path="res://assets/x.png" type="Texture" id=3]
 [ext_resource path="res://resources/main_theme.tres" type="Theme" id=4]
-[ext_resource path="res://scripts/Menu.gd" type="Script" id=5]
+[ext_resource path="res://scripts/menu.gd" type="Script" id=5]
 [ext_resource path="res://assets/banner.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=1]
@@ -157,6 +157,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("ColorRect:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -184,20 +196,19 @@ __meta__ = {
 }
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
-margin_right = 126.0
-margin_bottom = 49.0
+margin_right = 102.0
+margin_bottom = 22.0
 text = "Play"
 
 [node name="AboutButton" type="Button" parent="VBoxContainer"]
-margin_top = 53.0
-margin_right = 126.0
-margin_bottom = 102.0
+margin_top = 26.0
+margin_right = 102.0
+margin_bottom = 48.0
 text = "About"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -223,6 +234,7 @@ margin_left = 665.0
 margin_right = 965.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 300, 300 )
+rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 150, 300 )
 texture = ExtResource( 2 )
 expand = true
@@ -249,4 +261,3 @@ anims/splash = SubResource( 2 )
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/AboutButton" to="." method="_on_AboutButton_pressed"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -67,7 +67,7 @@ const bars_back = [
 
 const acceleration = [800, 800, 800, 100]
 const damage = [50, 20, 40, 10]
-const max_speed = [200, 150, 100, 200]
+const max_speed = [300, 250, 200, 250]
 const health = [100, 100, 100, 100]
 const attack_cooldown = [0.6, 2, 1, 0.5]
 const attack_radius = [100, 500, 500, 100]

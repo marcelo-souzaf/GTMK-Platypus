@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fireball.png-ebf41ff9bfc09df4525ef594c686960a.stex"
+path="res://.import/arrow.png-c5d3c6df3957a835c81ff452259a9879.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fxs/fireball.png"
-dest_files=[ "res://.import/fireball.png-ebf41ff9bfc09df4525ef594c686960a.stex" ]
+source_file="res://assets/vfx/arrow.png"
+dest_files=[ "res://.import/arrow.png-c5d3c6df3957a835c81ff452259a9879.stex" ]
 
 [params]
 

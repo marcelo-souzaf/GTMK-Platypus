@@ -1,7 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/attacks/SwordsmanAttack.gd" type="Script" id=1]
-[ext_resource path="res://scenes/TeleportParticles.gd" type="Script" id=2]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.465241, 0.775401, 1 )
@@ -36,6 +35,20 @@ scale_random = 0.37
 scale_curve = SubResource( 5 )
 color_ramp = SubResource( 3 )
 
+[sub_resource type="GDScript" id=7]
+script/source = "extends Particles2D
+
+export var time_length: float = 2
+
+func _ready():
+	emitting = true
+	var timer = get_tree().create_timer(time_length)
+	timer.connect(\"timeout\", self, \"_on_Timer_timeout\")
+
+func _on_Timer_timeout():
+	queue_free()
+"
+
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 123.5, 89 )
 
@@ -53,7 +66,7 @@ one_shot = true
 speed_scale = 4.0
 explosiveness = 0.8
 process_material = SubResource( 6 )
-script = ExtResource( 2 )
+script = SubResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 185.5, 0 )

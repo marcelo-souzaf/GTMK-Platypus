@@ -5,6 +5,7 @@ func _ready():
 	Game.init(self, get_parent().get_parent())
 	self.is_player = true
 	update_stats()
+	Music.start()
 	Music.play_music_for_class(self.class_)
 
 func _physics_process(delta):
