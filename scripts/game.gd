@@ -40,7 +40,7 @@ func init(player_node: Player, game_node: Node2D):
 	game = game_node
 	player = player_node
 	ui = game.get_node("HUD")
-	# ui.init(health_bar_scene.instance())
+	ui.init(health_bar_scene.instance())
 
 func _ready():
 	set_physics_process(false)
@@ -95,6 +95,7 @@ func transform_player_into(enemy):
 	player.update_stats()
 
 	player.health_bar.init(player)
+	ui.health_bar.init(player)
 	spawn_particles(player.position)
 	player.position = enemy.position
 	player.lin_speed = enemy.lin_speed

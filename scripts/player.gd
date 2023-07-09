@@ -8,7 +8,7 @@ func _ready():
 
 func _physics_process(delta):
 	# Attack
-	if Input.is_action_just_pressed("attack") and not on_cooldown:
+	if Input.is_action_just_pressed("attack") and cooldown.is_stopped():
 		var direction = get_global_mouse_position() - position
 		self.attack(direction)
 
@@ -43,7 +43,7 @@ func take_damage(amount: int, attacker_class: int):
 	if not $Invulnerability.is_stopped():
 		return
 	.take_damage(amount, attacker_class)
-	# Game.ui.health_bar.update_bar(self)
+	Game.ui.health_bar.update_bar(self)
 	
 	if self.health <= 0:
 		Game.game_over()

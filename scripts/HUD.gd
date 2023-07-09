@@ -3,9 +3,7 @@ extends CanvasLayer
 const empty = preload("res://assets/ui/Icon_Kill_Empty_32.png")
 const full = preload("res://assets/ui/Icon_Kill_Full_32.png")
 
-onready var icon = $Stats/Icon
 onready var kills = $Stats/Kills
-onready var level = $Stats/Level
 onready var strength = $Stats/Strength
 onready var strength_icon = $Stats/StrengthIcon
 
@@ -14,9 +12,11 @@ var width: float
 var health_bar: Node2D
 
 func init(health_bar_: Node2D):
+	$Stats.add_child(health_bar_)
+	health_bar_.init(Game.player)
+	health_bar_.position = Vector2(140, 110)
+	health_bar_.get_node("Bar").rect_scale = Vector2(1.6, 1.6)
 	self.health_bar = health_bar_
-	$Stats.add_child(health_bar)
-	health_bar.init(Game.player)
 
 func _ready():
 	slot = kills.get_child(0).duplicate(false)
@@ -35,11 +35,10 @@ func update_skulls():
 		kills.add_child(new_slot)
 
 func update_stats(class_: int):
-	return
-	icon.texture = Classes.icons[class_]
+	$Stats/Icon.texture = Classes.icons[class_]
 	var strong_against = Classes.weakness.find(class_)
 	strength_icon = Classes.icons[strong_against]
 
-	level.text = "Level  %d" % Game.player_level
+	$Stats/Level.text = "Level  %d" % Game.player_level
 	if Game.score > 0:
 		kills.get_child(Game.score - 1).texture = full
