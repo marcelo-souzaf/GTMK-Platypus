@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/music/GMTK_2024_test.mp3" type="AudioStream" id=1]
 [ext_resource path="res://assets/music/GMTK_2024_Archer_prewiev.mp3" type="AudioStream" id=2]
@@ -7,6 +7,11 @@
 [ext_resource path="res://scripts/music.gd" type="Script" id=5]
 [ext_resource path="res://assets/sfx/upgrade.mp3" type="AudioStream" id=6]
 [ext_resource path="res://assets/sfx/hover.mp3" type="AudioStream" id=7]
+[ext_resource path="res://assets/sfx/click.mp3" type="AudioStream" id=8]
+[ext_resource path="res://assets/sfx/attackA.mp3" type="AudioStream" id=10]
+[ext_resource path="res://assets/sfx/attackM.mp3" type="AudioStream" id=11]
+[ext_resource path="res://assets/sfx/attackS.mp3" type="AudioStream" id=12]
+[ext_resource path="res://assets/sfx/attackS_hit.mp3" type="AudioStream" id=13]
 
 [node name="Node" type="Node"]
 pause_mode = 2
@@ -34,6 +39,7 @@ volume_db = -10.0
 stream = ExtResource( 7 )
 
 [node name="Click" type="AudioStreamPlayer" parent="Effects"]
+stream = ExtResource( 8 )
 
 [node name="Upgrade" type="AudioStreamPlayer" parent="Effects"]
 stream = ExtResource( 6 )
@@ -41,9 +47,13 @@ stream = ExtResource( 6 )
 [node name="Attacks" type="Node" parent="."]
 
 [node name="AttackS" type="AudioStreamPlayer" parent="Attacks"]
+stream = ExtResource( 12 )
 
 [node name="AttackA" type="AudioStreamPlayer" parent="Attacks"]
+stream = ExtResource( 10 )
 
 [node name="AttackM" type="AudioStreamPlayer" parent="Attacks"]
+stream = ExtResource( 11 )
 
 [node name="AttackSHit" type="AudioStreamPlayer" parent="Attacks"]
+stream = ExtResource( 13 )

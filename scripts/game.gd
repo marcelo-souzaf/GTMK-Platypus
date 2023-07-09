@@ -92,7 +92,7 @@ func transform_player_into(enemy):
 	if score >= kills_to_level_up:
 		score = 0
 		player_level += 1
-		kills_to_level_up = int(clamp(5, 10, kills_to_level_up + 1))
+		kills_to_level_up = int(clamp(3 + total_kill_count / 5, 5, 10))
 		show_upgrades()
 		ui.update_skulls()
 

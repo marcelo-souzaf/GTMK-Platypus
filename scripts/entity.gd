@@ -45,7 +45,6 @@ func update_stats():
 
 func update_appearance():
 	self.sprite.frames = Classes.animations[class_]
-	# self.sprite.play("idle")
 
 func create_health_bar():
 	var health_bar_inst = Game.health_bar_scene.instance()

@@ -65,6 +65,12 @@ const bars_back = [
 	preload("res://assets/life_bars/M_HP_Back.png"),
 ]
 
+const colors = [
+	Color(0.87, 0.36, 0.21),
+	Color(0.58, 0.69, 0.4),
+	Color(0.46, 0.29, 0.51)
+]
+
 const acceleration = [800, 800, 800, 100]
 const damage = [50, 20, 40, 10]
 const max_speed = [300, 250, 200, 250]

@@ -173,12 +173,14 @@ tracks/6/keys = {
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 4 )
 script = ExtResource( 5 )
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 texture = ExtResource( 6 )
 expand = true
 
@@ -191,6 +193,7 @@ margin_left = -202.0
 margin_top = -188.0
 margin_right = -100.0
 margin_bottom = -72.0
+mouse_filter = 2
 __meta__ = {
 "_edit_group_": true
 }
@@ -249,7 +252,6 @@ margin_left = -23.5
 margin_top = -25.5
 margin_right = 23.5
 margin_bottom = 25.5
-mouse_filter = 2
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
@@ -259,5 +261,7 @@ autoplay = "splash"
 anims/RESET = SubResource( 1 )
 anims/splash = SubResource( 2 )
 
+[connection signal="mouse_entered" from="VBoxContainer/PlayButton" to="." method="_on_button_hovered"]
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/AboutButton" to="." method="_on_button_hovered"]
 [connection signal="pressed" from="VBoxContainer/AboutButton" to="." method="_on_AboutButton_pressed"]
