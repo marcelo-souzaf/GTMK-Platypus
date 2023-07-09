@@ -825,7 +825,6 @@ class_ = 1
 
 [node name="Enemy" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( -1797, -2134 )
-class_ = null
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( -280, -1858 )
@@ -837,7 +836,6 @@ class_ = 2
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 293, -1494 )
-class_ = null
 
 [node name="AreaMessagers" type="Node" parent="."]
 

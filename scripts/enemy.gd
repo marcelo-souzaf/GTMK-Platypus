@@ -15,6 +15,8 @@ func init(spawner_, enemy_class: int, pos: Vector2 = Vector2.ZERO):
 
 func _ready():
 	player = Game.player
+	if tutorial:
+		self.init(null, self.class_, self.position)
 
 func _physics_process(delta):
 	var player_dist = player.position.distance_to(self.position)
